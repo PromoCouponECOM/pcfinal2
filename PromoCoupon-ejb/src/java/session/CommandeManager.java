@@ -42,4 +42,10 @@ public class CommandeManager {
             return new Long(0);
         return res+1;
     }
+
+
+	public void removeCmd(Commande commande){
+        Commande cmd = em.find(Commande.class,commande.getIdC());
+        em.remove(cmd);
+    }
 }

@@ -127,12 +127,6 @@
     font-family: 'Trebuchet MS', Arial, sans-serif;
 }
 
-table {
-    border-color: #8F8F8F;
-    border-width: 5px;
-}
-
-
 .alimentation{
         background-color: #65537A;
         background-image:-webkit-linear-gradient(top, #65537A 0%, #2A2333 100%);
@@ -311,7 +305,7 @@ table {
 
 .ui-paginator-pages .ui-paginator-page{
 	background : none;
-    color:#000000;
+    color:#666A86;
     border: none;
     font-family: Arial;
     font-size: 15px;
@@ -320,13 +314,13 @@ table {
 }
 
 .ui-paginator-pages .ui-state-active{
-    color: #666A86;
+    color: #000000;
 }
 
 .ui-paginator-pages .ui-state-hover{
     background : none;
     box-shadow:none;
-    color : #666A86
+    color : #000000
 }
 
 .ui-paginator-next {

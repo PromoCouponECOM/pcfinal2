@@ -43,6 +43,10 @@ public class Item {
         return this.idOffre;
     }
     
+    public List<Long> getIdCoupons(){
+        return this.idCoupons;
+    }
+    
     public Boolean equals(Item item) {
         return this.idOffre == item.idOffre;
     }

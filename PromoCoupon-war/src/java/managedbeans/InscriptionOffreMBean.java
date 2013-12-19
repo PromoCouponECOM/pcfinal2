@@ -38,6 +38,8 @@ public class InscriptionOffreMBean {
     private CategorieManager catM;
     @EJB
     private EntrepriseManager entM;
+    @EJB
+    private OffreManager offM;
     
     private Offre offre;
     
@@ -47,6 +49,8 @@ public class InscriptionOffreMBean {
     
     private String selected;
     private String entreprise;
+    
+    private String selectedGlobal;
 
     
     public InscriptionOffreMBean() {
@@ -54,6 +58,14 @@ public class InscriptionOffreMBean {
         offre = new Offre();
         dateDebut= new Date();
         dateFin = new Date();
+    }
+
+    public String getSelectedGlobal() {
+        return selectedGlobal;
+    }
+
+    public void setSelectedGlobal(String selectedGlobal) {
+        this.selectedGlobal = selectedGlobal;
     }
     
     public String getSelected() {
@@ -86,6 +98,11 @@ public class InscriptionOffreMBean {
             return "ERROR";
         offre.setCategorie(c);
         
+        offre.setCategorieGlobale(selectedGlobal);
+        //Offre s = offM.getOffreGlobalByNameselectedGlobal(selectedGlobal);
+        
+        offre.setCategorie(c);
+        
         Entreprise e = entM.getEntrepriseByName(entreprise);
         if(e==null) return "ERROR";
         offre.setIdE(e);
@@ -105,7 +122,6 @@ public class InscriptionOffreMBean {
         offre.setTitle(settings.get("title"));
         offre.setValidation(Integer.valueOf(settings.get("validation")));
         offre.setDateModif(new Date());
-        
         offreManager.update(offre);
         
         return "OffreList";

@@ -48,7 +48,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Offre.findByValidation", query = "SELECT o FROM Offre o WHERE o.validation = :validation"),
     @NamedQuery(name = "Offre.findByDateModif", query = "SELECT o FROM Offre o WHERE o.dateModif = :dateModif"),
     @NamedQuery(name = "Offre.findByNbCoupons", query = "SELECT o FROM Offre o WHERE o.nbCoupons = :nbCoupons"),
-    @NamedQuery(name = "Offre.findByLimite", query = "SELECT o FROM Offre o WHERE o.limite = :limite")})
+    @NamedQuery(name = "Offre.findByLimite", query = "SELECT o FROM Offre o WHERE o.limite = :limite"),
+    @NamedQuery(name = "Offre.findByCategorieGlobale", query = "SELECT o FROM Offre o WHERE o.categorieGlobale = :categorieGlobale")})
 public class Offre implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -88,6 +89,9 @@ public class Offre implements Serializable {
     private Short nbCoupons;
     @Column(name = "limite")
     private Short limite;
+    @Size(max = 50)
+    @Column(name = "categorieGlobale")
+    private String categorieGlobale;
     @OneToMany(mappedBy = "idOffre")
     private Collection<Coupon> couponCollection;
     @JoinColumn(name = "idE", referencedColumnName = "idE")
@@ -208,6 +212,15 @@ public class Offre implements Serializable {
         this.limite = limite;
     }
 
+    public String getCategorieGlobale() {
+        return categorieGlobale;
+    }
+
+    public void setCategorieGlobale(String categorieGlobale) {
+        this.categorieGlobale = categorieGlobale;
+    }
+
+    
     @XmlTransient
     public Collection<Coupon> getCouponCollection() {
         return couponCollection;

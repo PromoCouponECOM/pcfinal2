@@ -1,15 +1,75 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <head>
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"> 
+    <h:head>
 		<meta charset="utf-8" />
         <link rel="stylesheet" href="css/userAccount.css" />
+		<link rel="stylesheet" href="css/menu.css" />
+		<link rel="stylesheet" href="css/villes.css" />
+        <link rel="stylesheet" href="css/listeOffres.css" />
 		<link rel="stylesheet" href="css/toolbar.css" />
+        
+		<script type="text/javascript">
+        $.fn.fermerBox = function() {
+            $('#boxLogin').fadeOut(400);
+        };
+        $.fn.clickConnection = (function(){
+            if ($('#boxLogin').is(':visible')) {
+                $('#boxLogin').fadeOut(400);
+            }
+            else {     
+                $('#boxLogin').fadeIn(400);
+            }
+		});
+		$(document).ready(function(){
+			$('#boxLogin').hide(); //Si l'utilisateur a javascript on cache la box de login pour pas surcharger la page
+
+			$('.click_connect').click(function(){
+                if ($('#boxLogin').is(':visible')) {
+					$('#boxLogin').fadeOut(400);
+				}
+				else {     
+					$('#boxLogin').fadeIn(400);
+				}
+			});
+
+			$('.fermer').click(function(){
+				$('#boxLogin').fadeOut(400);
+			});
+
+			$('#mdpPerdu').click(function(){
+				erreur("mdp_perdu");
+				return false;
+			});
+
+			$('.field').focus(function(){ //Supprime les textes par défauts des input lors du click sur ceux-ci
+				if($(this).val()=='Email' || $(this).val()=='Mot de passe' || $(this).val()=='Rechercher'){
+					$(this).val('');
+				}
+			});
+			
+			$('#listeVille').hide(); //Si l'utilisateur a javascript on cache l'affichage des villes
+			
+			$('.click_display_ville').click(function(){
+				if ($('#listeVille').is(':visible')) {
+					$('#listeVille').fadeOut(400);
+				}
+				else {
+					$('#listeVille').fadeIn(400);
+				}
+			});
+		});
+		</script>
+		<script type="text/javascript" src="js/lieu.js"></script>
 		
-        <title>Mon compte</title>
-    </head>
-    <body>
+        <title>Mon Compte</title>
+    </h:head>
+    <h:body>
+       
 		<div id="wrapper">
 			<header>
 				<nav>
@@ -17,17 +77,38 @@
 						<a href="index.xhtml"><span id="promo">Promo</span><span id="coupon">Coupon</span></a>
 					</div>
 					<div id="navigation">
-						<ul>
+						<ul><h:form> 
 							<li><a href="index.xhtml" style="color:#FFFFFF;">Accueil</a></li>
-							<li><a href="touteslespromos.xhtml" style="color:#FFFFFF;"> Toutes les promos</a></li>
+							<li><h:commandLink action="#{offreMBean.showTypeOffre()}" style="color:#FFFFFF;">Toutes les promos<f:setPropertyActionListener target="#{offreMBean.type}" value="tous" /></h:commandLink></li>
 							<li><a href="verschezmoi.xhtml" style="color:#FFFFFF;">Vers chez moi</a></li>
-						</ul>
+						</h:form> </ul>
 					</div>
-					<div id="compte">						
-						<a href="userAccount.xhtml">Gérer compte</a> | <a href="index.xhtml" onclick="click_disconnect()" >Se deconnecter</a>
+					 <h:panelGroup id="compte">
+                        <c:choose>
+                            <c:when test="#{sessionMBean.isConnectedAsCustomer()}">
+                                <h:form id="compteLogged"><img src="icones/user_32.png" style="width:18px; height:18px;" alt="compte"/>&nbsp;<a href="userAccount.xhtml">Mon compte</a> |  <h:commandLink action="#{sessionMBean.disconnect()}">D&eacute;connexion</h:commandLink></h:form>
+                            </c:when>
+                            <c:otherwise>
+                                <span id="compteNotLogged"><img src="icones/user_32.png" style="width:18px; height:18px;" alt="compte"/>&nbsp;<a href="#" onclick="$(this).clickConnection();">S'identifier</a> | <a href="signup.xhtml">S'inscrire</a></span>                   
+                            </c:otherwise>
+                        </c:choose>    
+					</h:panelGroup>
+					<div id="boxLogin">
+						<h3>Votre Compte</h3>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="fermer" class="fermer" href="#"><img src="icones/close_32.png" style="width:18px; height:18px;" alt="fermer"/></a>                       
+						<h:form id="formID"> 
+                            e-mail
+                            <br></br>
+							<h:inputText class="field" title="email" id="email" value="#{sessionMBean.loginNameTRY}" requiredMessage="Saisir votre e-mail" required="true" size="24" maxlength="24" style="width:150px; height:13px;"></h:inputText>
+                            <br></br>mot de passe<br></br>
+                            <h:inputSecret class="field" title="password" id="password" value="#{sessionMBean.passwordTRY}" requiredMessage="Saisir votre mot de passe" redisplay="true" required="true" size="24" maxlength="24" style="width:150px; height:13px;"></h:inputSecret>
+                            <p:commandButton id="submit" onclick="$(this).fermerBox();" value="" styleClass="submit" actionListener="#{sessionMBean.tryConnection()}" update=":compte"/>
+						</h:form>
+						<a id="mdpPerdu" href="#" style="font-size:11px;">Mot de passe perdu ?</a>
 					</div>
 				</nav>
 			</header>
+            
 			<section>
 				<nav>
 					<div id="userNav">
@@ -118,5 +199,5 @@
 			</div>             
 		</aside>
 		
-    </body>
+    </h:body>
 </html>

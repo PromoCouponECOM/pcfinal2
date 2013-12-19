@@ -11,7 +11,7 @@ body
 #wrapper 
 {
 	top: 0;
-	background-color : #666A86;
+	background-color : #176CA7;
 	border-radius: 5px;
 	width: 95%;
 	left: 1%;
@@ -34,9 +34,9 @@ header
 {
 	position: relative;
 	height:86px;
-	background-color: #666A86;
-	background-image:-webkit-linear-gradient(top, #4E5167 0%, #666A86 100%);
-	background-image:linear-gradient(to bottom, #4E5167 0%, #666A86 100%);
+	background-color: #176CA7;
+	background-image:-webkit-linear-gradient(top, #0D588C 0%, #176CA7 100%);
+	background-image:linear-gradient(to bottom, #0D588C 0%, #176CA7 100%);
 	border-left:solid 2px #363636;
 	border-right:solid 2px #363636;
 }
@@ -106,10 +106,19 @@ header nav li
 }
 
 /*connection au compte*/
-#compte
+#compte{
+    width:300px;
+    text-align: right;
+}
+
+#compteLogged
 {
-	margin-left: 13%;
-	text-align: right;
+	font-size: 12px;
+	color: #00AE6A;
+}
+
+#compteNotLogged
+{
 	font-size: 12px;
 	color: #00AE6A;
 }
@@ -123,25 +132,69 @@ header nav li
 {	
 	position: relative;
 	width:200px;
-	height:110px;
+	height:130px;
 	z-index: 1;
 	margin-left: 84%;
 	margin-top: -10px;
-	background-color: #666A86;
+	background-color: #176CA7;
 	box-shadow: 0px 2px 5px #1c1a19;
     border-radius: 5px;
 }
 
+#formID
+{
+   margin-top:-8px;
+   font-size: 14px; 
+}
+
 #boxLogin h3, #fermer
 {
-margin-top: -20px;
- display: inline-block;
+    margin-top: -20px;
+    display: inline-block;
 }
 
 #fermer
 {
- font-size: 12px;
+    margin-left: 24px;
+    margin-top: 2px;
+    font-size: 12px;
 }
+
+#submit #password{
+    display: inline-block;
+}
+
+.submit {
+    vertical-align: -4px;
+    margin-left: 2px;
+    background : none;
+    background-image: url(../icones/boxLogin_btn.gif);
+    background-repeat: no-repeat;
+    width: 17px;
+    height: 17px;
+    border: none;
+    box-shadow: none;
+}
+.submit.ui-state-hover {
+    background : none;
+    background-image: url(../icones/boxLogin_btn.gif);
+    background-repeat: no-repeat;
+    width: 17px;
+    height: 17px;
+    border: none;
+    box-shadow: none;
+}
+.submit.ui-state-active {
+    background : none;
+    background-image: url(../icones/boxLogin_btn.gif);
+    background-repeat: no-repeat;
+    width: 17px;
+    height: 17px;
+    border: none;
+    box-shadow: none;
+}
+
+
 
 /********** SECTION **********/
 /*disposition générale*/
@@ -164,7 +217,7 @@ section nav
 	height: 100%;
 	width: 220px;
 	position: relative;
-	background-color : #666A86;
+	background-color : #176CA7;
 }
 
 /*menu choisir la ville */
@@ -227,9 +280,11 @@ footer
 {
 	position: relative;
 	height:100px;
-	background-color: #4E5167;
-	background-image:-webkit-linear-gradient(top, #666A86 0%, #4E5167 100%);
-	background-image:linear-gradient(to bottom, #666A86 0%, #4E5167 100%);
+    
+	background-color: #0D588C;
+	background-image:-webkit-linear-gradient(top, #176CA7 0%, #0D588C 100%);
+	background-image:linear-gradient(to bottom, #176CA7 0%, #0D588C 100%);
+    
 	border-left:solid 2px #363636;
 	border-right:solid 2px #363636;
 }

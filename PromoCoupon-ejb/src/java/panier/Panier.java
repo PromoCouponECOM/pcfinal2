@@ -33,17 +33,20 @@ public class Panier {
         this.prixTotal+=prix;
     }
 
-    public void removeOne(int idOffre, double prix) {
+    public long removeOne(int idOffre, double prix) {
+        long couponId;
         for (Item item : this.commande) {
             if (item.getIdOffre() == idOffre) {
-                if(item.getQuantity()==1)
+                if(item.getQuantity()==1){
+                    couponId = item.getIdCoupons().get(0);
                     commande.remove(item);
-                else
-                        item.removeOne();
+                }else
+                        couponId = item.removeOne();
                 this.prixTotal-=prix;
-                return;
+                return couponId;
             }
         }
+        return -1;
     }
     
     public List<Integer> getOffres(){

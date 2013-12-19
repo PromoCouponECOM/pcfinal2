@@ -61,6 +61,11 @@
                         </f:facet>
                         <h:outputText value="#{item.idCoupon}"/>
                     </h:column>
+                    <h:column>
+    			<f:facet name="header">Action</f:facet>
+    			<h:commandLink value="Delete" 
+                                action="#{commandeMBean.delectAction(item)}" />
+    		</h:column>
                 </h:dataTable>
             </h:form>
         </f:view>

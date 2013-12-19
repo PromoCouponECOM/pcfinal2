@@ -11,7 +11,7 @@ body
 #wrapper 
 {
 	top: 0;
-	background-color : #FFFFFF;
+	background-color : #176CA7;
 	border-radius: 5px;
 	width: 95%;
 	left: 1%;
@@ -194,75 +194,52 @@ header nav li
     box-shadow: none;
 }
 
-
 /********** SECTION **********/
+/*disposition g�n�rale*/
+section nav, section article
+{
+    display: inline-block;
+    vertical-align: top;
+}
+
 section
 {
 	border-left:solid 2px #363636;
 	border-right:solid 2px #363636;
 }
 
-/* disposition de section */
-article, #entreprise 
+/*menu categories*/
+section nav
 {
-	display: inline-block;
-	vertical-align: top;
+	width: 220px;
+	position: relative;
+	background-color : #666A86;
+	border-right:solid 2px #363636;
 }
 
-/* formulaire coté client */
-article
-{
-	width : 80%;
+section nav {
+	height: 500px;
 }
 
-#client_title
+#page
 {
-	margin-top: 10px;
-	height: 30px;
-	font-size: 16px;
-	font-weight: bold;
+	width:130%;
 }
 
-#client_section
-{
+table{
+	margin-top:3%;
 }
 
-article table
+#page table
 {
 	font-size: 12px;
 	text-align: right;
-}
-
-table {
-margin-top: 3%;
 }
 
 td.titres {
 
 	font-size: 20px;
 	text-align: left;
-
-}
-
-/* information coté entreprise */
-#entreprise
-{
-	width : 250px;
-	height : 601px;
-	position: relative;
-    background-color: #706b64;
-}
-
-#entreprise_title
-{
-	margin-top: 10px;
-	height: 30px;
-	font-size: 16px;
-	font-weight: bold;
-}
-
-#entreprise_section
-{
 }
 
 

@@ -78,6 +78,12 @@ public class CommandeMBean implements Serializable{
     public String list() {  
         System.out.println("###LIST###");  
         return "CommandeList";  
-    }  
+    } 
+    
+    public String delectAction(Commande commande){
+        commandes.remove(commande);
+        cmdManager.removeCmd(commande);
+        return "CommandeList"; 
+    }
     
 }

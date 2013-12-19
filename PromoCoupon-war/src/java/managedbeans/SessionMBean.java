@@ -5,6 +5,8 @@
 package managedbeans;
 
 import entities.Adresse;
+import entities.Coupon;
+import entities.Offre;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,7 @@ import session.AdresseManager;
 import session.EntrepriseManager;
 import session.UtilisateurManager;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ManagedBean;
 import panier.Panier;
 import session.CouponManager;
 import session.OffreManager;
@@ -24,20 +27,37 @@ import session.OffreManager;
  *
  * @author John624
  */
+
 @Named(value = "sessionMBean")
 @SessionScoped
 public class SessionMBean implements Serializable {
 
     public enum State {
-
         NotConnected, ConnectedAsCustomer, ConnectedAsOrganization, ConnectedAsAdmin
     }
 
     private State state;
     private Integer idUser;
     private String loginName;
-
+    private String loginNameTRY;
+    private String passwordTRY;
     private Panier panier;
+    
+    public String getLoginNameTRY() {
+        return loginNameTRY;
+    }
+
+    public void setLoginNameTRY(String loginNameTRY) {
+        this.loginNameTRY = loginNameTRY;
+    }
+
+    public String getPasswordTRY() {
+        return passwordTRY;
+    }
+
+    public void setPasswordTRY(String passwordTRY) {
+        this.passwordTRY = passwordTRY;
+    }
 
     @EJB
     private UtilisateurManager UM;
@@ -80,8 +100,13 @@ public class SessionMBean implements Serializable {
         }
         return "#";
     }
+    
+    public String tryConnection(){
+        return userConnect(loginNameTRY, passwordTRY);
+    }
 
     public String disconnect() {
+        this.state = State.NotConnected;
         panier = null;
         return "index";
     }
@@ -106,31 +131,62 @@ public class SessionMBean implements Serializable {
         return this.loginName;
     }
 
-    public String ajouterOffreAuPanier(int idOffre) {
-        String[] res = CM.getFirstAvailableForOffre(idOffre).split("\\|");
-        long idCoupon = Long.parseLong(res[0]);
+    public String ajouterOffreAuPanier(long idOffre) {
+        List<Coupon> coupons = CM.getAllCoupons();
+        for(Coupon coupon : coupons){
+            if((coupon.getIdOffre().getIdO().longValue()==idOffre && coupon.getStatus().shortValue()==1)){
+                System.out.println("Offre n°"+idOffre+", Coupon n°"+coupon.getIdCoupon().longValue()+" (id de l'offre du coupon: "+coupon.getIdOffre().getIdO().longValue());
+                System.out.println("Status du coupon: "+coupon.getStatus().shortValue());
+                CM.modifyCouponStatus(coupon, (short)2);
+                panier.addCoupon((int)idOffre, coupon.getIdCoupon().longValue(), coupon.getIdOffre().getPrixActuel().doubleValue());
+                System.out.println("Coupon n°"+coupon.getIdCoupon().longValue()+" (offre n°"+idOffre
+                +") ajouté au panier.");
+                //retirerOffreDuPanier(idOffre);
+                return "";
+            }
+        }
+        System.out.println("pas ajouté au panier");
+        //String[] res = CM.getFirstAvailableForOffre(idOffre).split("\\|");
+        /*long idCoupon = Long.parseLong(res[0]);
         double prix = Double.parseDouble(res[1]);
         if (idCoupon == -1) {
             return "#";
         }
-        panier.addCoupon(idOffre, idCoupon, prix);
+        panier.addCoupon(idOffre, idCoupon, prix);*/
         return "#";
     }
 
-    public String retirerOffreDuPanier(int idOffre) {
-        String[]res = OM.getTitreEtPrixById(idOffre).split("\\|");
-        panier.removeOne(idOffre, Double.parseDouble(res[1]));
+    public String retirerOffreDuPanier(long idOffre) {
+        Offre offre = OM.getOffreById(idOffre);
+        if(offre!=null){
+            long idCoupon = panier.removeOne((int)idOffre, offre.getPrixActuel().doubleValue());
+            if(idCoupon!=-1){
+                Coupon coupon = CM.getCouponById(idCoupon);
+                CM.modifyCouponStatus(coupon, (short)1);
+            }
+        }
         return "#";
     }
     
-    // Titre|Prix|Quantité
-    public List<String> getOffresPanier(){
-        ArrayList<String> res = new ArrayList<String>();
+    public List<Offre> getOffresPanier(){
+        ArrayList<Offre> res = new ArrayList<Offre>();
         for(Integer i : panier.getOffres()){
-            res.add(OM.getTitreEtPrixById(i) +"|"+panier.getQuantity(i));
+            res.add(OM.getOffreById(i));
         }
         return res;
     }
+    /*
+        public List<String> refreshPanierMiniature(){
+        ArrayList<String> res = new ArrayList<String>();
+        for(Integer i : panier.getOffres()){
+            
+            res.add(OM.getOffreById(i).getTitle()+" - (x"+panier.getQuantity(i)+")");
+            System.out.println("MINIATURE PANIER: "+res.get(res.size()-1)); 
+        }
+        
+        return res;
+    }*/
+        
     
     public double getPrixTotalPanier(){
         return panier.getPrixTotal();

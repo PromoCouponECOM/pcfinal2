@@ -68,7 +68,7 @@ public class InscriptionCMDMBean implements Serializable{
             System.out.println("ERROR.xhtml?msg=userInconnu");
             return "ERROR.xhtml?msg=userInconnu";
         }
-        coupon = couponM.getCouponById(new Integer(1));
+        coupon = couponM.getCouponById(new Long(1));
         if(coupon == null){
             System.out.println("ERROR.xhtml?msg=couponInconnu");
             return "ERROR.xhtml?msg=userInconnu";

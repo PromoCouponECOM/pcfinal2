@@ -45,6 +45,11 @@
                     <h:outputLabel value="Validation" for="validation" />
                     <h:inputText id="validation" value="#{inscriptionOffreMBean.settings['validation']}" title="Validation" />
                     
+                    <h:outputLabel value="CategorieGlobal" for="categorieGlobal" />                   
+                    <p:selectOneMenu value="#{inscriptionOffreMBean.selectedGlobal}" var="selectedGlobal" id="categorieGlobalList">
+                        <f:selectItems value="#{categorieMBean.catgGlobal}"/>                 
+                    </p:selectOneMenu>
+                        
                     <h:outputLabel value="Categorie" for="categorie" />                   
                     <p:selectOneMenu value="#{inscriptionOffreMBean.selected}" var="type" id="categorielist">
                         <f:selectItems value="#{categorieMBean.catg}"/>                 

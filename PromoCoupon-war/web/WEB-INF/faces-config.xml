@@ -21,7 +21,7 @@
     <managed-bean>
         <managed-bean-name>offreMBean</managed-bean-name>
         <managed-bean-class>managedbeans.OffreMBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
+        <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     <managed-bean>
         <managed-bean-name>UtilisateurMBean</managed-bean-name>
@@ -42,5 +42,14 @@
         <managed-bean-name>inscriptEntrepriseMBean</managed-bean-name>
         <managed-bean-class>managedbeans.InscriptEntrepriseMBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+        <managed-bean>
+        <managed-bean-name>inscriptionUserMBean</managed-bean-name>
+        <managed-bean-class>managedbeans.InscriptionUserMBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+	            <property-name>sessionMBean</property-name>
+	            <value>#{sessionMBean}</value>
+	</managed-property>
     </managed-bean>
 </faces-config>

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui"> 
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"> 
     <h:head>
 		<meta charset="utf-8" />
         <link rel="stylesheet" href="css/style.css" />
@@ -11,14 +12,29 @@
 		<link rel="stylesheet" href="css/villes.css" />
         <link rel="stylesheet" href="css/listeOffres.css" />
 		<link rel="stylesheet" href="css/toolbar.css" />
-        <link rel="stylesheet" href="css/listeOffres.css" />
         
 		<script type="text/javascript">
+        $.fn.fermerBox = function() {
+            $('#boxLogin').fadeOut(400);
+        };
+        $.fn.clickConnection = (function(){
+            if ($('#boxLogin').is(':visible')) {
+                $('#boxLogin').fadeOut(400);
+            }
+            else {     
+                $('#boxLogin').fadeIn(400);
+            }
+		});
 		$(document).ready(function(){
 			$('#boxLogin').hide(); //Si l'utilisateur a javascript on cache la box de login pour pas surcharger la page
 
 			$('.click_connect').click(function(){
-				$('#boxLogin').fadeIn(400);
+                if ($('#boxLogin').is(':visible')) {
+					$('#boxLogin').fadeOut(400);
+				}
+				else {     
+					$('#boxLogin').fadeIn(400);
+				}
 			});
 
 			$('.fermer').click(function(){
@@ -61,23 +77,33 @@
 						<a href="index.xhtml"><span id="promo">Promo</span><span id="coupon">Coupon</span></a>
 					</div>
 					<div id="navigation">
-						<ul>
+						<ul><h:form> 
 							<li><a href="index.xhtml" style="color:#FFFFFF;">Accueil</a></li>
-							<li><a href="touteslespromos.xhtml" style="color:#FFFFFF;"> Toutes les promos</a></li>
+							<li><h:commandLink action="#{offreMBean.showTypeOffre()}" style="color:#FFFFFF;">Toutes les promos<f:setPropertyActionListener target="#{offreMBean.type}" value="tous" /></h:commandLink></li>
 							<li><a href="verschezmoi.xhtml" style="color:#FFFFFF;">Vers chez moi</a></li>
-						</ul>
+						</h:form> </ul>
 					</div>
-					<div id="compte">						
-						<a href="#" class="click_connect">S'identifier</a> | <a href="signup.xhtml">S'inscrire</a>
-					</div>
+					 <h:panelGroup id="compte">
+                        <c:choose>
+                            <c:when test="#{sessionMBean.isConnectedAsCustomer()}">
+                                <h:form id="compteLogged"><img src="icones/user_32.png" style="width:18px; height:18px;" alt="compte"/>&nbsp;<a href="userAccount.xhtml">Mon compte</a> |  <h:commandLink action="#{sessionMBean.disconnect()}">D&eacute;connexion</h:commandLink></h:form>
+                            </c:when>
+                            <c:otherwise>
+                                <span id="compteNotLogged"><img src="icones/user_32.png" style="width:18px; height:18px;" alt="compte"/>&nbsp;<a href="#" onclick="$(this).clickConnection();">S'identifier</a> | <a href="signup.xhtml">S'inscrire</a></span>                   
+                            </c:otherwise>
+                        </c:choose>    
+					</h:panelGroup>
 					<div id="boxLogin">
 						<h3>Votre Compte</h3>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="fermer" class="fermer" href="#">fermer</a>
-						<form action="" method="post" name="form_connexion">
-							<input class="loginField" name="email" type="text" style="width:150px; height:13px;" value="Email" />
-							<input class="loginField" name="password" type="password" style="width:150px; height:13px;" value="Mot de passe" />
-							<input name="submit" type="submit" value="ok"/>
-						</form>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="fermer" class="fermer" href="#"><img src="icones/close_32.png" style="width:18px; height:18px;" alt="fermer"/></a>                       
+						<h:form id="formID"> 
+                            e-mail
+                            <br></br>
+							<h:inputText class="field" title="email" id="email" value="#{sessionMBean.loginNameTRY}" requiredMessage="Saisir votre e-mail" required="true" size="24" maxlength="24" style="width:150px; height:13px;"></h:inputText>
+                            <br></br>mot de passe<br></br>
+                            <h:inputSecret class="field" title="password" id="password" value="#{sessionMBean.passwordTRY}" requiredMessage="Saisir votre mot de passe" redisplay="true" required="true" size="24" maxlength="24" style="width:150px; height:13px;"></h:inputSecret>
+                            <p:commandButton id="submit" onclick="$(this).fermerBox();" value="" styleClass="submit" actionListener="#{sessionMBean.tryConnection()}" update=":compte"/>
+						</h:form>
 						<a id="mdpPerdu" href="#" style="font-size:11px;">Mot de passe perdu ?</a>
 					</div>
 				</nav>
@@ -105,141 +131,156 @@
 							<li><a href="#" class="click_display_ville" onclick="swichNameLieu('Toulouse', 'listeVille')">Toulouse</a></li> 																	  									
 						</ol>
 					</div>
+                                
 					<div id="categories">
+                        <h:form>            
 						<ul class="menu-deroulant">
-							<li><a href="touteslespromos.xhtml">Alimentation</a>
+                            <li><h:commandLink action="#{offreMBean.showTypeGlobalOffre()}">Alimentation<f:setPropertyActionListener target="#{offreMBean.typeGlobal}" value="alimentation" /></h:commandLink>
 								<ul>    
-									<li><a href="#" title="Resto">Resto</a></li>  
-									<li><a href="#" title="Aliment">Aliment</a></li>  
-									<li><a href="#" title="Boission">Boission</a></li>  
+									<li><h:commandLink action="#{offreMBean.showTypeOffre()}">Aliments<f:setPropertyActionListener target="#{offreMBean.type}" value="aliments" /></h:commandLink></li>  
+									<li><h:commandLink action="#{offreMBean.showTypeOffre()}">Boissons<f:setPropertyActionListener target="#{offreMBean.type}" value="boissons" /></h:commandLink></li>  
+									<li><h:commandLink action="#{offreMBean.showTypeOffre()}">Nourriture animal<f:setPropertyActionListener target="#{offreMBean.type}" value="nourriture" /></h:commandLink></li>  
+                                    <li><h:commandLink action="#{offreMBean.showTypeOffre()}">Surgel&eacute;s<f:setPropertyActionListener target="#{offreMBean.type}" value="surgeles" /></h:commandLink></li>
+                                </ul>
+							</li>
+							<li><h:commandLink action="#{offreMBean.showTypeGlobalOffre()}">Aventure/Loisirs<f:setPropertyActionListener target="#{offreMBean.typeGlobal}" value="aventure" /></h:commandLink>
+								<ul>    
+                                    <li><h:commandLink action="#{offreMBean.showTypeOffre()}">Accrobranche/ Escalade<f:setPropertyActionListener target="#{offreMBean.type}" value="accobranche" /></h:commandLink></li>  
+									<li><h:commandLink action="#{offreMBean.showTypeOffre()}">Courses<f:setPropertyActionListener target="#{offreMBean.type}" value="courses" /></h:commandLink></li>  
+									<li><h:commandLink action="#{offreMBean.showTypeOffre()}">Randonn&eacute;es<f:setPropertyActionListener target="#{offreMBean.type}" value="randonnee" /></h:commandLink></li>
+                                    <li><h:commandLink action="#{offreMBean.showTypeOffre()}">Sport<f:setPropertyActionListener target="#{offreMBean.type}" value="sport" /></h:commandLink></li>
 								</ul>
 							</li>
-							<li><a href="touteslespromos.xhtml">Aventure/Loisirs</a>
+							<li><h:commandLink action="#{offreMBean.showTypeGlobalOffre()}">Beaut&eacute; &amp; bien-&ecirc;tre<f:setPropertyActionListener target="#{offreMBean.typeGlobal}" value="beaute" /></h:commandLink>
 								<ul>    
-									<li><a href="#" title="Lien1">Resto</a></li>  
-									<li><a href="#" title="Lien2">Aliment</a></li>  
-									<li><a href="#" title="Lien3">Boission</a></li>  
+                                    <li><h:commandLink action="#{offreMBean.showTypeOffre()}">Epilation<f:setPropertyActionListener target="#{offreMBean.type}" value="epilation" /></h:commandLink></li>  
+									<li><h:commandLink action="#{offreMBean.showTypeOffre()}">Maquillage<f:setPropertyActionListener target="#{offreMBean.type}" value="maquilla" /></h:commandLink></li>  
+									<li><h:commandLink action="#{offreMBean.showTypeOffre()}">Relaxant<f:setPropertyActionListener target="#{offreMBean.type}" value="relaxant" /></h:commandLink></li>
+                                    <li><h:commandLink action="#{offreMBean.showTypeOffre()}">Shampoings<f:setPropertyActionListener target="#{offreMBean.type}" value="shampoings" /></h:commandLink></li> 										
 								</ul>
 							</li>
-							<li><a href="touteslespromos.xhtml">Beaut&eacute; &amp; bien-&ecirc;tre</a>
+							<li><h:commandLink action="#{offreMBean.showTypeGlobalOffre()}">Informatique/AudioVisuel<f:setPropertyActionListener target="#{offreMBean.typeGlobal}" value="informatique" /></h:commandLink>
 								<ul>    
-									<li><a href="#" title="Lien1">Lien2</a></li>  
-									<li><a href="#" title="Lien2">Lien3</a></li>  
-									<li><a href="#" title="Lien3">Lien3</a></li>
-									<li><a href="#" title="Lien4">Lien4</a></li>  										
+									<li><h:commandLink action="#{offreMBean.showTypeOffre()}">Accessoires<f:setPropertyActionListener target="#{offreMBean.type}" value="accessoires" /></h:commandLink></li>  
+									<li><h:commandLink action="#{offreMBean.showTypeOffre()}">Audio-Video<f:setPropertyActionListener target="#{offreMBean.type}" value="audio" /></h:commandLink></li>  
+									<li><h:commandLink action="#{offreMBean.showTypeOffre()}">Ordinateurs<f:setPropertyActionListener target="#{offreMBean.type}" value="ordinateurs" /></h:commandLink></li>
+                                    <li><h:commandLink action="#{offreMBean.showTypeOffre()}">Tablettes<f:setPropertyActionListener target="#{offreMBean.type}" value="tablettes" /></h:commandLink></li>										
 								</ul>
 							</li>
-							<li><a href="touteslespromos.xhtml">Informatique/AudioVisuel</a>
+							<li><h:commandLink action="#{offreMBean.showTypeGlobalOffre()}">Restauration<f:setPropertyActionListener target="#{offreMBean.typeGlobal}" value="restauration" /></h:commandLink>
 								<ul>    
-									<li><a href="#" title="Lien1">Lien2</a></li>  
-									<li><a href="#" title="Lien2">Lien3</a></li>  
-									<li><a href="#" title="Lien3">Lien3</a></li>
-									<li><a href="#" title="Lien4">Lien4</a></li>  										
+									<li><h:commandLink action="#{offreMBean.showTypeOffre()}">Antillaise<f:setPropertyActionListener target="#{offreMBean.type}" value="antillaise" /></h:commandLink></li>  
+									<li><h:commandLink action="#{offreMBean.showTypeOffre()}">Asiatique<f:setPropertyActionListener target="#{offreMBean.type}" value="asiatique" /></h:commandLink></li>  
+									<li><h:commandLink action="#{offreMBean.showTypeOffre()}">Occidentale<f:setPropertyActionListener target="#{offreMBean.type}" value="occidentale" /></h:commandLink></li>
+                                    <li><h:commandLink action="#{offreMBean.showTypeOffre()}">Orientale<f:setPropertyActionListener target="#{offreMBean.type}" value="orientale" /></h:commandLink></li> 										
 								</ul>
 							</li>
-							<li><a href="touteslespromos.xhtml">Restauration</a>
+							<li><h:commandLink action="#{offreMBean.showTypeGlobalOffre()}">Services<f:setPropertyActionListener target="#{offreMBean.typeGlobal}" value="services" /></h:commandLink>
 								<ul>    
-									<li><a href="#" title="Lien1">Lien2</a></li>  
-									<li><a href="#" title="Lien2">Lien3</a></li>  
-									<li><a href="#" title="Lien3">Lien3</a></li>
-									<li><a href="#" title="Lien4">Lien4</a></li>  										
+									<li><h:commandLink action="#{offreMBean.showTypeOffre()}">Entretiens<f:setPropertyActionListener target="#{offreMBean.type}" value="entretiens" /></h:commandLink></li>  
+									<li><h:commandLink action="#{offreMBean.showTypeOffre()}">Garages<f:setPropertyActionListener target="#{offreMBean.type}" value="garages" /></h:commandLink></li>  
+									<li><h:commandLink action="#{offreMBean.showTypeOffre()}">R&eacute;parations<f:setPropertyActionListener target="#{offreMBean.type}" value="reperations" /></h:commandLink></li>
+                                    <li><h:commandLink action="#{offreMBean.showTypeOffre()}">Autre<f:setPropertyActionListener target="#{offreMBean.type}" value="autre" /></h:commandLink></li>  										
 								</ul>
 							</li>
-							<li><a href="touteslespromos.xhtml">Services</a>
+							<li><h:commandLink action="#{offreMBean.showTypeGlobalOffre()}">Tickets<f:setPropertyActionListener target="#{offreMBean.typeGlobal}" value="tickets" /></h:commandLink>
 								<ul>    
-									<li><a href="#" title="Lien1">Lien2</a></li>  
-									<li><a href="#" title="Lien2">Lien3</a></li>  
-									<li><a href="#" title="Lien3">Lien3</a></li>
-									<li><a href="#" title="Lien4">Lien4</a></li>  										
+									<li><h:commandLink action="#{offreMBean.showTypeOffre()}">Cin&eacute;ma<f:setPropertyActionListener target="#{offreMBean.type}" value="cinema" /></h:commandLink></li>  
+									<li><h:commandLink action="#{offreMBean.showTypeOffre()}">Concerts<f:setPropertyActionListener target="#{offreMBean.type}" value="concerts" /></h:commandLink></li>  
+									<li><h:commandLink action="#{offreMBean.showTypeOffre()}">Evenements sportifs<f:setPropertyActionListener target="#{offreMBean.type}" value="evenements" /></h:commandLink></li>
+                                    <li><h:commandLink action="#{offreMBean.showTypeOffre()}">Th&eacute;atre<f:setPropertyActionListener target="#{offreMBean.type}" value="theatre" /></h:commandLink></li>  															
 								</ul>
 							</li>
-							<li><a href="touteslespromos.xhtml">Tickets</a>
+							<li><h:commandLink action="#{offreMBean.showTypeGlobalOffre()}">Voyages/H&ocirc;tels<f:setPropertyActionListener target="#{offreMBean.typeGlobal}" value="voyages" /></h:commandLink>
 								<ul>    
-									<li><a href="#" title="Lien1">Lien2</a></li>  
-									<li><a href="#" title="Lien2">Lien3</a></li>  
-									<li><a href="#" title="Lien3">Lien3</a></li>
-									<li><a href="#" title="Lien4">Lien4</a></li>  										
+									<li><h:commandLink action="#{offreMBean.showTypeOffre()}">Nuits<f:setPropertyActionListener target="#{offreMBean.type}" value="nuits" /></h:commandLink></li>  
+									<li><h:commandLink action="#{offreMBean.showTypeOffre()}">Locations<f:setPropertyActionListener target="#{offreMBean.type}" value="locations" /></h:commandLink></li>  
+									<li><h:commandLink action="#{offreMBean.showTypeOffre()}">S&eacute;jours<f:setPropertyActionListener target="#{offreMBean.type}" value="sejours" /></h:commandLink></li>
+                                    <li><h:commandLink action="#{offreMBean.showTypeOffre()}">Vacances<f:setPropertyActionListener target="#{offreMBean.type}" value="vacances" /></h:commandLink></li>  					  										
 								</ul>
 							</li>
-							<li><a href="touteslespromos.xhtml">Voyages/H&ocirc;tels</a>
-								<ul>    
-									<li><a href="#" title="Lien1">Lien2</a></li>  
-									<li><a href="#" title="Lien2">Lien3</a></li>  
-									<li><a href="#" title="Lien3">Lien3</a></li>
-									<li><a href="#" title="Lien4">Lien4</a></li>  										
-								</ul>
-							</li>
-							<li><a href="touteslespromos.xhtml">Toutes les promos</a>
-								<ul>    
-									<li><a href="#" title="Lien1">Lien2</a></li>  
-									<li><a href="#" title="Lien2">Lien3</a></li>  
-									<li><a href="#" title="Lien3">Lien3</a></li>
-									<li><a href="#" title="Lien4">Lien4</a></li>  										
-								</ul>
+							<li><h:commandLink action="#{offreMBean.showTypeGlobalOffre()}">Toutes les promos<f:setPropertyActionListener target="#{offreMBean.typeGlobal}" value="tous" /></h:commandLink>
 							</li>
 						</ul>
+                     </h:form>
 					</div>
 					<div id="recherche">
 						<input class="field" type="text" name="recherche" maxlength="25" value="Rechercher" ></input>
 					</div>
 				</nav>
 				<article>
-					<div id="best">
+					<div id="tri">
 					</div>
-					<div id="news">
+					<div id="display">
 						   <h:form id="form">  
-                                <p:dataGrid var="offre" value="#{offreMBean.offres}" columns="2"  
-                                    rows="8" paginator="true"  
+                                <p:dataGrid var="offre" value="#{offreMBean.getOffresSelectedNormalOrGlobale()}" columns="3"  
+                                    rows="9" paginator="true"  
                                     paginatorTemplate="pages : {PageLinks}">
                                     <p:commandLink update=":form:offreDetail" oncomplete="PF('offreDialog').show()" title="voir le détail de l'offre">
-                                        <p:panel styleClass="panelStyleMain">
-                                            <h:panelGrid columns="1" style="width:100%;" styleClass="#{offre.categorie.nomCateg}"> 
-                                            <h:outputText value="#{offre.title}" />
+                                        <p:panel styleClass="panelStyleMain" style="width:340px; height:396px;">
+                                            <h:panelGrid columns="1" styleClass="#{offre.categorieGlobale}"> 
+                                                <h:outputText value="#{offre.title}" />
                                             </h:panelGrid>
-                                            <h:panelGrid columns="1" style="width:100%;" styleClass="panelStyle"> 
-                                                <p:graphicImage value="images/#{offre.image}.png" />
+                                            <h:panelGrid columns="1" style="width:100%;" styleClass="panelStyle" > 
+                                                <p:graphicImage style="width:100%; height:202px;" value="images/#{offre.image}.png" />
                                             </h:panelGrid>
-                                            <h:panelGrid columns="2" style="width:100%;" styleClass="panelStyle">
-                                                <h:outputText value="#{offre.idE.nomE}"/> <h:outputText style="align:right" value="#{offre.idE.adrE.ville}" />
+                                            <h:panelGrid columns="1" styleClass="panelStyle">
+                                                <h:outputText value="#{offre.idE.nomE}"/> 
                                             </h:panelGrid>
-                                            <h:panelGrid columns="1" style="width:100%;" styleClass="panelStyle"> 
-                                                <h:outputText value="#{offre.dscription}"/>
+                                            <h:panelGrid columns="1" styleClass="panelStyle">
+                                                <h:outputText value="#{offre.idE.adrE.ville}" /> 
+                                            </h:panelGrid>              
+                                            <h:panelGrid columns="1" styleClass="panelStyle"> 
+                                                <h:outputText value="#{offreMBean.couperDescription(offre.dscription)}"/>
                                             </h:panelGrid>
-                                            <h:panelGrid columns="3" style="width:100%;" styleClass="panelStyle">
-                                                <h:outputText id="prixActuel" value="#{offre.prixActuel}€"/>
-                                                <h:outputText id="prixOrigin" value="#{offre.prixOrigin}€"/>
-                                                <h:outputText id="pourcentage" value="#{offreMBean.calculerPourcentage(offre.prixActuel, offre.prixOrigin)}"/>      
+                                            <br></br>
+                                            <h:panelGrid columns="6" styleClass="panelStyle">
+                                                <h:outputText value="Prix : "/>
+                                                <h:outputText id="prixActuel" style="font-weight: bold; color:#363636;" value="#{offre.prixActuel}€"/>
+                                                <h:outputText value="&nbsp;au lieu de : "/>
+                                                <h:outputText style="text-decoration:line-through;" id="prixOrigin" value="#{offre.prixOrigin}€"/>
+                                                <h:outputText id="prixPourcentage"  style="font-weight: bold; color:#363636;" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#{offreMBean.calculerPourcentage(offre.prixActuel, offre.prixOrigin)}"/>
+                                                <h:outputText value="de r&eacute;duction"/>      
                                             </h:panelGrid>
                                         </p:panel>
                                         <f:setPropertyActionListener value="#{offre}" target="#{offreMBean.selectedOffre}" /> 
                                     </p:commandLink> 
                                 </p:dataGrid>  
 
-                               <p:dialog header="Détail de l'offre : #{offreMBean.selectedOffre.title}"  widgetVar="offreDialog" modal="true">
+                               <p:dialog header="Détail de l'offre : #{offreMBean.selectedOffre.title}" widgetVar="offreDialog" modal="true">
                                     <p:outputPanel id="offreDetail"> 
                                         <h:panelGrid  columns="2">  
-                                            <h:panelGrid  columns="1">
-                                                <h:outputText value="#{offreMBean.selectedOffre.categorie.nomCateg}" /> 
-                                                <p:graphicImage value="images/#{offreMBean.selectedOffre.image}.png"/>  
-                                                <h:outputText value="#{offreMBean.selectedOffre.dscription}" />
-                                                <h:outputText value="#{offreMBean.selectedOffre.idE.adrE.numEtRue}" />
-                                                <h:outputText value="#{offreMBean.selectedOffre.idE.resuE}" />
+                                            <h:panelGrid  columns="1" style="width:380px;">
+                                                <p:panel styleClass="#{offreMBean.selectedOffre.categorieGlobale}">
+                                                    <h:outputText style="font-weight: bold; color:#FFFFFF;" value="#{offreMBean.selectedOffre.title}" />
+                                                </p:panel>
+                                                <p:graphicImage style="width:100%; height:220px;" value="images/#{offreMBean.selectedOffre.image}.png"/>  
+                                                <h:outputText styleClass="panelStyle" value="#{offreMBean.selectedOffre.dscription}" />          
                                             </h:panelGrid>
-                                            <h:panelGrid  columns="2">
-                                                <h:outputLabel value="prix: " />  
-                                                <h:outputText value="#{offreMBean.selectedOffre.prixActuel}€" />
-                                                
-                                                <h:outputLabel value="prix d'origine: " />  
-                                                <h:outputText value="#{offreMBean.selectedOffre.prixOrigin}€" />
-                                                
-                                                <h:outputLabel value="reduction: " />  
-                                                <h:outputText value="#{offreMBean.calculerPourcentage(offreMBean.selectedOffre.prixActuel, offreMBean.selectedOffre.prixOrigin)}" />
-                                                
-                                                <h:outputLabel value="dates de validité" />  
-                                                <h:outputText value="#{offreMBean.dateValidite(offreMBean.selectedOffre.dateDebut, offreMBean.selectedOffre.dateFin)}" />
-                                                
-                                                <p:commandButton value="Ajouter" actionListener="#{sessionMBean.ajouterOffreAuPanier2(offreMBean.selectedOffre)}" id="withIcon" icon="ui-icon-disk" />
-                                            </h:panelGrid>
+                                            <h:panelGrid columns="1" style="width:380px; text-align: center;">
+                                                <h:outputText styleClass="panelStyle" value="#{offreMBean.selectedOffre.idE.nomE} " />
+                                                <h:outputText styleClass="panelStyle" value="#{offreMBean.selectedOffre.idE.adrE.numEtRue} #{offreMBean.selectedOffre.idE.adrE.codePostale} #{offreMBean.selectedOffre.idE.adrE.ville}" />
+                                                <h:outputText styleClass="panelStyle" value="#{offreMBean.selectedOffre.idE.resuE}" />
+                                                <br></br>
+                                                <h:panelGrid  columns="2" style="width:380px; text-align: right;">
+                                                    <h:outputLabel styleClass="panelStyle" value="Prix : " />  
+                                                    <h:outputText style="font-weight: bold; color:#363636; font-size: 14px; font-family: 'Trebuchet MS', Arial, sans-serif;" value="#{offreMBean.selectedOffre.prixActuel}€" />
+
+                                                    <h:outputLabel styleClass="panelStyle" value="Prix d'origine : " />  
+                                                    <h:outputText style="font-weight: bold; color:#363636; font-size: 14px; font-family: 'Trebuchet MS', Arial, sans-serif;" value="#{offreMBean.selectedOffre.prixOrigin}€" />
+
+                                                    <h:outputLabel styleClass="panelStyle" value="Réduction : " />  
+                                                    <h:outputText style="font-weight: bold; color:#363636; font-size: 14px; font-family: 'Trebuchet MS', Arial, sans-serif;" value="#{offreMBean.calculerPourcentage(offreMBean.selectedOffre.prixActuel, offreMBean.selectedOffre.prixOrigin)}" />
+
+                                                    <h:outputLabel styleClass="panelStyle" value="Validité : " />  
+                                                    <h:outputText style="font-weight: bold; color:#363636; font-size: 14px; font-family: 'Trebuchet MS', Arial, sans-serif;" value="#{offreMBean.dateValidite(offreMBean.selectedOffre.dateDebut, offreMBean.selectedOffre.dateFin)}" />
+
+                                                    <h:outputLabel styleClass="panelStyle" value="Quantité max(#{offreMBean.selectedOffre.prixOrigin}) : " />  
+                                                    <h:outputText style="font-weight: bold; color:#363636; font-size: 14px; font-family: 'Trebuchet MS', Arial, sans-serif;" value="offrembean quantite selec" />                     
+                                                </h:panelGrid>
+                                                <br></br>
+                                                <p:commandButton value="Ajouter" actionListener="#{sessionMBean.ajouterOffreAuPanier(offreMBean.selectedOffre.idO)}" id="withIcon" icon="ui-icon-disk" />
+                                            </h:panelGrid>         
                                         </h:panelGrid> 
                                     </p:outputPanel>
                                 </p:dialog>  

@@ -28,8 +28,17 @@ public class CouponManager {
 //        Query query = em.createNamedQuery("Coupon.findByIdCoupon").setParameter("idCoupon", i);
 //        return query;
 //    }singleton
-    public List<Long> getAllAvailableForOffre(int idOffre) {
+    
+    
+    
+    public void modifyCouponStatus(Coupon coupon, short status){
+            coupon.setStatus(status);
+            coupon = this.update(coupon);
+    }
+    
+    public List<Long> getAllAvailableForOffre(long idOffre) {
         ArrayList<Long> res = new ArrayList<Long>();
+        
         Query query = em.createNamedQuery("Coupon.findAllAvailableByOffre");
         query.setParameter("idOffre", idOffre);
         List<Coupon> coupons = query.getResultList();
@@ -84,10 +93,10 @@ public class CouponManager {
     }
     
         
-    public Coupon getCouponById(Integer idC){
+    public Coupon getCouponById(Long idC){
          List<Coupon> coupons = getAllCoupons();
          for (Coupon c : coupons) {
-            if(c.getIdCoupon().intValue()== idC)
+            if(c.getIdCoupon().longValue()== idC)
                 return c;
         }
         return null;

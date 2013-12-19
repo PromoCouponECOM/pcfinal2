@@ -1,23 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package session;
 
 import entities.Categorie;
 import entities.Offre;
 import java.util.List;
-import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
-/**
- *
- * @author John624
- */
 @Stateless
 @LocalBean
 public class OffreManager {
@@ -29,6 +20,7 @@ public class OffreManager {
         return query.getResultList();
     }
     
+    
     public String getTitreOffre(int idOffre){
         Query query= em.createNamedQuery("Offre.findByIdO");
         query.setParameter("IdO", idOffre);
@@ -36,6 +28,16 @@ public class OffreManager {
         List<Offre> tmp = query.getResultList();
         if(tmp!=null && !tmp.isEmpty())
             return tmp.get(0).getTitle();
+        return null;
+    }
+    
+     public Offre getOffreById(long idOffre) {
+        Query query= em.createNamedQuery("Offre.findByIdO");
+        query.setParameter("idO", idOffre);
+        
+        List<Offre> tmp = query.getResultList();
+        if(tmp!=null && !tmp.isEmpty())
+            return tmp.get(0);
         return null;
     }
     
@@ -68,7 +70,7 @@ public class OffreManager {
     public List<Offre> getSpecialOffres (String typeOffre){
         Query queryCategorie = em.createNamedQuery("Categorie.findByNomCateg");
         queryCategorie.setParameter("nomCateg", typeOffre);
-        
+
         Categorie idc = (Categorie)queryCategorie.getResultList().get(0);
         
         Query queryOffre = em.createNamedQuery("Offre.findByIdC");
@@ -76,5 +78,18 @@ public class OffreManager {
         
         System.out.println("###hello"+queryOffre.getResultList()+"###");
         return queryOffre.getResultList();
+    }
+    
+    public List<Offre> getSpecialGlobalOffres(String typeGlobal) {
+        Query query = em.createNamedQuery("Offre.findByCategorieGlobale");
+        query.setParameter("categorieGlobale", typeGlobal);
+        return query.getResultList();
+    }
+
+    public Offre getOffreGlobalByNameselectedGlobal(String selectedGlobal) {
+        Query query = em.createNamedQuery("Offre.findByCategorieGlobale");
+        query.setParameter("selectedGlobal", selectedGlobal);
+        Offre res = (Offre)query.getSingleResult();
+        return res;
     }
 }
