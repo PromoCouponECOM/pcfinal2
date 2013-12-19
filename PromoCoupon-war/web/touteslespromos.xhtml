@@ -275,7 +275,7 @@
                                                     <h:outputLabel styleClass="panelStyle" value="Validité : " />  
                                                     <h:outputText style="font-weight: bold; color:#363636; font-size: 14px; font-family: 'Trebuchet MS', Arial, sans-serif;" value="#{offreMBean.dateValidite(offreMBean.selectedOffre.dateDebut, offreMBean.selectedOffre.dateFin)}" />
 
-                                                    <h:outputLabel styleClass="panelStyle" value="Quantité max(#{offreMBean.selectedOffre.prixOrigin}) : " />  
+                                                    <h:outputLabel styleClass="panelStyle" value="Quantité max(#{couponMBean.getNbCouponsDisponibles(selectedOffre.idO)}) : " />  
                                                     <h:outputText style="font-weight: bold; color:#363636; font-size: 14px; font-family: 'Trebuchet MS', Arial, sans-serif;" value="offrembean quantite selec" />                     
                                                 </h:panelGrid>
                                                 <br></br>

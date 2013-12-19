@@ -67,4 +67,16 @@ public class Panier {
     public double getPrixTotal(){
         return this.prixTotal;
     }
+    
+    public List<Long> viderOffrePanier(int idOffre){
+        List<Long> res = new ArrayList<Long>();
+        for(Item item : this.commande)
+            if(item.getIdOffre()==idOffre){
+                while(item.getQuantity()>0)
+                    res.add(item.removeOne());
+                this.commande.remove(item);
+            }
+        
+        return res;
+    }
 }

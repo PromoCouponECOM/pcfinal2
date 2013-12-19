@@ -220,27 +220,32 @@
                                         paginatorTemplate="">
                                         <p:panel>
                                             <h:panelGrid columns="5" style="width:100%;" > 
-                                                <h:panelGrid columns="1" style="width:100%;" styleClass="#{offre.categorie.nomCateg}"  >
+                                                <h:panelGrid columns="1" style="width:100%;" styleClass="#{offre.categorieGlobale}"  >
                                                     <h:outputText value="#{offre.title}" />
                                                 </h:panelGrid>
-                                                <h:panelGrid columns="1" style="width:100%;" styleClass="#{offre.categorie.nomCateg}">
+                                                <h:panelGrid columns="1" style="width:100%;" styleClass="#{offre.categorieGlobale}">
                                                     <h:outputText value="Nombre" styleClass="#{offre.categorie.nomCateg}"/>
                                                 </h:panelGrid>
-                                                <h:panelGrid columns="1" style="width:100%;" styleClass="#{offre.categorie.nomCateg}">
+                                                <h:panelGrid columns="1" style="width:100%;" styleClass="#{offre.categorieGlobale}">
                                                     <h:outputText value="Prix à l'unité" styleClass="#{offre.categorie.nomCateg}"/>
                                                 </h:panelGrid>
-                                                <h:panelGrid columns="1" style="width:100%;" styleClass="#{offre.categorie.nomCateg}">
+                                                <h:panelGrid columns="1" style="width:100%;" styleClass="#{offre.categorieGlobale}">
                                                     <h:outputText value="Montant" styleClass="#{offre.categorie.nomCateg}"/>
                                                 </h:panelGrid>
-                                                <h:panelGrid columns="1" style="width:100%;" styleClass="#{offre.categorie.nomCateg}">
-                                                    <h:outputText value="Supprimer" />
+                                                <h:panelGrid columns="1" style="width:100%;" styleClass="#{offre.categorieGlobale}">
+                                                    <h:outputText value="Retirer du panier" styleClass="#{offre.categorie.nomCateg}"/>
                                                 </h:panelGrid>
                     
                                                 <p:graphicImage value="images/#{offre.image}.png" />
-                                                <h:outputText id="nombreExemplaire" value="Recupérer nombre"/>
+                                                <h:panelGrid columns="3">
+                                                    <p:commandLink rendered="#{sessionMBean.getNbCouponsPourOffre(offre.idO)!=1}" action="#{sessionMBean.retirerOffreDuPanier(offre.idO)}"  update=":form">-</p:commandLink>
+                                                    <h:outputText value="-" rendered="#{sessionMBean.getNbCouponsPourOffre(offre.idO)==1}"/>
+                                                    <h:outputText id="nombreExemplaire" value="&nbsp;#{sessionMBean.getNbCouponsPourOffre(offre.idO)}&nbsp;"/>
+                                                    <p:commandLink action="#{sessionMBean.ajouterOffreAuPanier(offre.idO)}"  update=":form">+</p:commandLink>
+                                                </h:panelGrid> 
                                                 <h:outputText id="prixActuel" value="#{offre.prixActuel}€"/>
                                                 <h:outputText id="Montant" value="Faire Calcul"/>
-                                                <h:outputText value="Faire Suppression"/>
+                                                <p:commandLink action="#{sessionMBean.viderOffrePanier(offre.idO)}"  update=":form">Retirer</p:commandLink>
                                             </h:panelGrid>
 
                                         </p:panel>

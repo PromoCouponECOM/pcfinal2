@@ -94,4 +94,13 @@ public class CouponMBean implements Serializable{
         System.out.println("###UPDATE###");  
         couponManager.update(coupon);  
     }
+    
+     public int getNbCouponsDisponibles(long idOffre){
+        int res = 0;
+        List<Coupon> coupons = couponManager.getAllCoupons();
+        for(Coupon coupon : coupons)
+            if(coupon.getIdOffre().getIdO().longValue()==idOffre && coupon.getStatus().shortValue()==1)
+                res++;
+        return res;
+    }
 }

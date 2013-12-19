@@ -165,7 +165,7 @@ public class SessionMBean implements Serializable {
                 CM.modifyCouponStatus(coupon, (short)1);
             }
         }
-        return "#";
+        return "panier";
     }
     
     public List<Offre> getOffresPanier(){
@@ -190,5 +190,24 @@ public class SessionMBean implements Serializable {
     
     public double getPrixTotalPanier(){
         return panier.getPrixTotal();
+    }
+    
+    public int getNbCouponsPourOffre(int idOffre){
+        return panier.getQuantity(idOffre);
+    }
+    
+     public String viderOffrePanier(int idOffre) {
+        List<Long> idCoupons = panier.viderOffrePanier(idOffre);
+        for(Long idCoupon : idCoupons){
+        Coupon coupon = CM.getCouponById(idCoupon);
+        CM.modifyCouponStatus(coupon, (short) 1);
+        }
+        return "";
+    }
+    
+    public String viderPanierComplet(){
+        for(int idOffre : panier.getOffres())
+            viderOffrePanier(idOffre);
+        return "";
     }
 }
