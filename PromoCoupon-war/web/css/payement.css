@@ -244,6 +244,12 @@ article{
 }
 
 
+
+.hidden{
+  display:none;
+}
+
+
 /*barre coté droit*/
 /*aside
 {
