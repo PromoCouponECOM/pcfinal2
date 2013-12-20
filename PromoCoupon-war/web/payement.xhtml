@@ -122,10 +122,10 @@
                             <br></br>
 							<h:inputText class="field" title="email" id="email" value="#{sessionMBean.loginNameTRY}" requiredMessage="Saisir votre e-mail" required="true" size="24" maxlength="24" style="width:150px; height:13px;"></h:inputText>
                             <br></br>mot de passe<br></br>
-                            <h:inputSecret class="field" title="password" id="password" value="#{sessionMBean.passwordTRY}" requiredMessage="Saisir votre mot de passe" redisplay="true" required="true" size="24" maxlength="24" style="width:150px; height:13px;"></h:inputSecret>
+                            <h:inputSecret class="field" title="mot de passe" id="password" value="#{sessionMBean.passwordTRY}" requiredMessage="Saisir votre mot de passe" redisplay="true" required="true" size="24" maxlength="24" style="width:150px; height:13px;"></h:inputSecret>
                             <p:commandButton id="submit" onclick="$(this).fermerBox();" value="" styleClass="submit" actionListener="#{sessionMBean.tryConnection()}" update=":compte"/>
 						</h:form>
-						<a id="mdpPerdu" href="#" style="font-size:11px;">Mot de passe perdu ?</a>
+						<a id="mdpPerdu" href="#" style="font-size:11px; color: #00253E;">Mot de passe perdu ?</a>
 					</div>
 				</nav>
 			</header>
