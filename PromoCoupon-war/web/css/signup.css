@@ -11,7 +11,7 @@ body
 #wrapper 
 {
 	top: 0;
-	background-color : #FFFFFF;
+	background-color : #176CA7;
 	border-radius: 5px;
 	width: 95%;
 	left: 1%;
@@ -88,9 +88,9 @@ header nav li
 	display: block;
 	border-radius: 5px;
 	box-shadow: 0px 2px 5px #1c1a19;	
-	background-color: #004D2F;
-	background-image:-webkit-linear-gradient(top, #00AE6A 0%, #004D2F 100%);
-	background-image:linear-gradient(to bottom, #00AE6A 0%, #004D2F 100%);
+	background-color: #00AE6A
+	background-image:-webkit-linear-gradient(top, #00AE6A 0%, #006F44 100%);
+	background-image:linear-gradient(to bottom, #00AE6A 0%, #006F44 100%);
 	padding: 1em 1em 1em 1em;
 }
 
@@ -165,7 +165,7 @@ header nav li
 }
 
 .submit {
-    vertical-align: -8px;
+    vertical-align: -4px;
     margin-left: 2px;
     background : none;
     background-image: url(../icones/boxLogin_btn.gif);
@@ -200,6 +200,7 @@ section
 {
 	border-left:solid 2px #363636;
 	border-right:solid 2px #363636;
+    background-color: #FFFFFF;
 }
 
 /* disposition de section */
@@ -248,9 +249,9 @@ td.titres {
 #entreprise
 {
 	width : 250px;
-	height : 601px;
+	height : 800px;
 	position: relative;
-    background-color: #706b64;
+    background-color: #D6D6D6;
 }
 
 #entreprise_title
@@ -268,7 +269,7 @@ td.titres {
 
 
 /********** ASIDE **********/
-#articles
+/*#articles
 {
 	margin-top: 150px;
     height:250px;
@@ -280,7 +281,7 @@ td.titres {
 {
 	text-align: left;
 	font-size: 14px;
-}
+}*/
 
 
 

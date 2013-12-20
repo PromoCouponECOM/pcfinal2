@@ -8,9 +8,6 @@
     <h:head>
 		<meta charset="utf-8" />
         <link rel="stylesheet" href="css/signup.css" />
-		<link rel="stylesheet" href="css/menu.css" />
-		<link rel="stylesheet" href="css/villes.css" />
-        <link rel="stylesheet" href="css/listeOffres.css" />
 		<link rel="stylesheet" href="css/toolbar.css" />
         
 		<script type="text/javascript">
@@ -66,7 +63,7 @@
 		</script>
 		<script type="text/javascript" src="js/lieu.js"></script>
 		
-        <title>Sign Up Entreprise</title>
+        <title>Accueil</title>
     </h:head>
     <h:body>
        
@@ -111,17 +108,19 @@
 
             <section>
                 <article>
-                    <div id="client_title">
-                        Vous-êtes un nouveau client entreprise?
+                    <h1 style="text-align: center">Inscription Entreprise</h1>
+                    <br></br>
+                    <div id="client_title" align="center">
+                        <p:outputLabel>Vous-êtes un nouveau client entreprise?</p:outputLabel>
                     </div>
-                    <div id="client_section">
-                        Inscrivez-vous dès maintenant et profitez ! Ba ouais morray.
+                    <div id="client_section" align="center">
+                         <p:outputLabel>Créez un compte et proposez des offres !</p:outputLabel>
                     </div>
                     <h:form >
                         <table align="center" cellspacing="10">
                             <tbody>
                                 <tr>
-                                    <p:messages  id="messages" showDetail="true" autoUpdate="true"/> 
+                                    <td colspan="4" align="left"> <p:messages  id="messages" showDetail="true" autoUpdate="true"/></td>
                                 </tr>  
                                 <tr>
 
@@ -129,28 +128,28 @@
                                 </tr>
                                 <tr>
                                     <td align="right"><b> Nom* :</b></td>
-                                    <td align="left"><p:inputText id="nom" value="#{inscriptEntrepriseMBean.settings['nomE']}"  type="text" size="24" maxlength="24"></p:inputText></td>
+                                    <td align="left"><p:inputText id="nom" value="#{inscriptEntrepriseMBean.settings['nomE']}" required="true" type="text" size="24" maxlength="24"></p:inputText></td>
                                     <td align="right"><b> Numéro siret* :</b></td>					
-                                    <td align="left"><p:inputText id="siret" value="#{inscriptEntrepriseMBean.settings['siret']}" onkeypress="IsNum(event)" type="text"  size="24" maxlength="24"></p:inputText></td>														</tr>
+                                    <td align="left"><p:inputText id="siret" value="#{inscriptEntrepriseMBean.settings['siret']}" required="true" onkeypress="IsNum(event)" type="text"  size="24" maxlength="24"></p:inputText></td>														</tr>
                                 <tr>
                                     <td align="right"><b> Rib* :</b></td>
-                                    <td align="left"><p:inputText id="rib" value="#{inscriptEntrepriseMBean.settings['rib']}" type="text" size="30" maxlength="30"></p:inputText></td>
+                                    <td align="left"><p:inputText id="rib" value="#{inscriptEntrepriseMBean.settings['rib']}" required="true" type="text" size="30" maxlength="30"></p:inputText></td>
                                     <td align="right"><b> Resposable* :</b></td>
-                                    <td align="left"><p:inputText id="consultE" value="#{inscriptEntrepriseMBean.settings['consulE']}" type="text" size="24" maxlength="24"></p:inputText></td>
+                                    <td align="left"><p:inputText id="consultE" value="#{inscriptEntrepriseMBean.settings['consulE']}" required="true" type="text" size="24" maxlength="24"></p:inputText></td>
                                 </tr>
                                 <tr>
                                     <td align="right"><b> Adresse *:</b></td>
-                                    <td colspan="4" align="left"><p:inputText id="adresse" value="#{inscriptEntrepriseMBean.settings['rue']}" type="text"  size="50" maxlength="80"></p:inputText></td>								
+                                    <td colspan="4" align="left"><p:inputText id="adresse" value="#{inscriptEntrepriseMBean.settings['rue']}" required="true" type="text"  size="94" maxlength="80"></p:inputText></td>								
                                 </tr>
                                 <tr>
                                     <td align="right"><b> Code postal* :</b></td>
-                                    <td align="left"><p:inputText id="postal" value="#{inscriptEntrepriseMBean.settings['code']}" type="text" size="24" maxlength="5"></p:inputText></td>
-                                    <td align="right"><b> Ville :</b></td>					
-                                    <td align="left"><p:inputText id="ville" value="#{inscriptEntrepriseMBean.settings['ville']}" type="text" size="24" maxlength="24"></p:inputText></td>									
+                                    <td align="left"><p:inputText id="postal" value="#{inscriptEntrepriseMBean.settings['code']}" required="true" type="text" size="24" maxlength="5"></p:inputText></td>
+                                    <td align="right"><b> Ville *:</b></td>					
+                                    <td align="left"><p:inputText id="ville" value="#{inscriptEntrepriseMBean.settings['ville']}" required="true" type="text" size="24" maxlength="24"></p:inputText></td>									
                                 </tr>
                                 <tr>
                                     <td align="right"><b> T&eacute;l&eacute;phone :</b></td>
-                                    <td align="left"><p:inputText id="telephone" value="#{inscriptEntrepriseMBean.settings['telE']}" type="text"  size="24" maxlength="10"></p:inputText></td>								
+                                    <td align="left"><p:inputText id="telephone" value="#{inscriptEntrepriseMBean.settings['telE']}" required="true" type="text"  size="24" maxlength="10"></p:inputText></td>								
                                 </tr>
                                 <tr>
                                     <td colspan="4" align="left"><b> &nbsp; </b></td>								
@@ -161,8 +160,8 @@
                                 <tr>
                                     <td align="right"><b> E-mail* :</b></td>
                                     <td align="left"><h:inputText id="email"  value="#{inscriptEntrepriseMBean.settings['mailE']}" required="true" size="24" maxlength="40"
-                                                                  requiredMessage="Please enter your email address."
-                                                                  validatorMessage="Invalid email format"
+                                                                  requiredMessage="Saisiez votre email"
+                                                                  validatorMessage="Email invalid "
                                                                   >
 
                                             <f:validateRegex
@@ -182,28 +181,60 @@
                                     <td colspan="4" align="left"><b> &nbsp; </b></td>								
                                 </tr>
                                 <tr>
-                                    <td colspan="4" align="center"><h:commandButton id="update" value="Inscrire" action="#{inscriptEntrepriseMBean.save()}"/></td>									
+                                    <td colspan="4" align="center"><h:commandButton id="update" value="Valider" action="#{inscriptEntrepriseMBean.save()}"/></td>									
                                 </tr>
                             </tbody>
                         </table>
                     </h:form>
                 </article>
+                <div id="entreprise">
+                    <div id="entreprise_title">
+                        Vous-êtes un consommateur?
+                    </div>
+                    <div id="entreprise_section">
+                        Si vous &ecirc;tes à la recherche de promotions, vous pouvez cre&acute; un compte et vous procurer des offres, <a href="signup.xhtml">cliquez ici</a> pour nous rejoindre !
+                    </div>
+                </div>
 
             </section>
             <footer>
-                Conditions d'utilisatio etc... gna gna gna
             </footer>
         </div>
 
         <aside>			 
+            <div id="articles" class="barredoutils">
+                <ul>
+                    <li><a href="panier.xhtml"><img class="menus" src="icones/Cart.png" width="80%" height="25%"/></a>
+                        <div id="panier">
+                            <a href="panier.xhtml"><p:outputLabel><h3>Consulter mon panier</h3></p:outputLabel>
+                            </a>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
             <div id="options" class="barredoutils">
                 <ul>
-                    <li><a href="#"><img src="icones/Globe.png" width="50%" height="50%" /></a></li>
-                    <li><a href="#"><img src="icones/Email.png" width="50%" height="50%" /></a></li>
-                    <li><a href="#"><img src="icones/Light.png" width="50%" height="50%" /></a></li>
+                    <li><a href="#"><img src="icones/history.png" width="70%" height="70%" /></a></li>
+                    <li><a href="#"><img src="icones/Search.png" width="70%" height="70%" /></a>
+                        <div id="coucou" class="submenu">
+                            <form id="search" action="#" method="get" class="serchform">
+                                <input id="searche" type="text" name="q"></input>
+                                <button type="submit" title="Chercher" class="button">ok</button>
+                            </form>
+                        </div>
+                    </li>
+                    <br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+                    <li> <a href="mailto:promocoupon.service@gmail.com?subject=subject&amp;"><img src="icones/Email.png" width="70%" height="70%" /></a>
+                        <div id="envoie">
+                            <p:outputLabel><h3>Nous contacter</h3></p:outputLabel>
+                        </div>
+                    </li>
+                    <li><a href="#"><img src="icones/Globe.png" width="70%" height="70%" /></a></li>
+                    <li><a href="#"><img src="icones/Light.png" width="70%" height="70%"/></a></li>
                 </ul>
             </div>             
-        </aside>
+        </aside>        
 
     </h:body>
 </html>

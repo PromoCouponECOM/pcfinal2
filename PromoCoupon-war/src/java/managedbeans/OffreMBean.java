@@ -225,8 +225,8 @@ public class OffreMBean implements Serializable {
         for(Offre o : offres){
             res += "<div id=\"content\">";
             res += "<h1>"+o.getTitle()+"</h1>";
-            res += "<p>"+o.getDscription()+"</p>";
-            res += "<p> <a href=\"OffreList.xhtml?id="+o.getIdO()+"\"> DÃ©tail </a> </p>%";
+            res += "<p>"+couperDescription(o.getDscription())+"</p>";
+            res += "<p> <a href=\"touteslespromos.xhtml\"> D&eacute;tail de l'offre </a> </p>%";
         }
         
         return res.substring(0, res.length()-1);

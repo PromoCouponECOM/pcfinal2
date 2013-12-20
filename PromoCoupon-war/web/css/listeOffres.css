@@ -128,9 +128,9 @@
 }
 
 .alimentation{
-        background-color: #65537A;
-        background-image:-webkit-linear-gradient(top, #65537A 0%, #2A2333 100%);
-        background-image:linear-gradient(to bottom, #65537A 0%, #2A2333 100%);
+background-color: #65537A;
+background-image:-webkit-linear-gradient(top, #65537A 0%, #3D3249 100%);
+background-image:linear-gradient(to bottom, #65537A 0%, #3D3249 100%);
         width:100%; 
         font-family:Arial; 
         font-size:17px; 
@@ -138,9 +138,9 @@
 }
 
 .aventure{
-        background-color: #729EBF;
-        background-image: -webkit-linear-gradient(top, #729EBF 0%, #333A40 100%);
-        background-image:linear-gradient(to bottom, #729EBF 0%, #333A40 100%);
+background-color: #729EBF;
+background-image: -webkit-linear-gradient(top, #729EBF 0%, #527188 100%);
+background-image:linear-gradient(to bottom, #729EBF 0%, #527188 100%);
         width:100%; 
         font-family:Arial;
         font-size:17px; 
@@ -149,9 +149,9 @@
 
 
 .beaute{
-        background-color: #F80098;
-        background-image:-webkit-linear-gradient(top, #F80098 0%, #6A0041 100%);
-        background-image:linear-gradient(to bottom, #F80098 0%, #6A0041 100%);
+background-color: #E38AC1;
+background-image:-webkit-linear-gradient(top, #E38AC1 0%, #A75387 100%);
+background-image:linear-gradient(to bottom, #E38AC1 0%, #A75387 100%);
         width:100%; 
         font-family:Arial;
         font-size:17px; 
@@ -159,9 +159,9 @@
 }
 
 .informatique{
-        background-color: #B2B2B2;
-        background-image:-webkit-linear-gradient(top, #B2B2B2 0%, #525252 100%);
-        background-image:linear-gradient(to bottom, #B2B2B2 0%, #525252 100%);
+background-color: #AAAAAA;
+background-image:-webkit-linear-gradient(top, #AAAAAA 0%, #696969 100%);
+background-image:linear-gradient(to bottom, #AAAAAA 0%, #696969 100%);
         width:100%; 
         font-family:Arial; 
         font-size:17px; 
@@ -169,9 +169,9 @@
 }
 
 .restauration{
-        background-color: #00E035;
-        background-image:-webkit-linear-gradient(top, #00E035 0%, #005E16 100%);
-        background-image:linear-gradient(to bottom, #00E035 0%, #005E16 100%);
+background-color: #18D946;
+background-image:-webkit-linear-gradient(top, #18D946 0%, #139732 100%);
+background-image:linear-gradient(to bottom, #18D946 0%, #139732 100%);
         width:100%; 
         font-family:Arial;
         font-size:17px; 
@@ -179,9 +179,9 @@
 }
 
 .services{
-        background-color: #FF2121;
-        background-image:-webkit-linear-gradient(top, #FF2121 0%, #5B0000 100%);
-        background-image:linear-gradient(to bottom, #FF2121 0%, #5B0000 100%);
+background-color: #CD3030;
+background-image:-webkit-linear-gradient(top, #CD3030 0%, #8F1515 100%);
+background-image:linear-gradient(to bottom, #CD3030 0%, #8F1515 100%);
         width:100%; 
         font-family:Arial; 
         font-size:17px; 
@@ -189,9 +189,9 @@
 }
 
 .tickets{
-        background-color: #FFFC00;
-        background-image:-webkit-linear-gradient(top, #FFFC00 0%, #797A00 100%);
-        background-image:linear-gradient(to bottom, #FFFC00 0%, #797A00 100%);
+background-color: #E9E61A;
+background-image:-webkit-linear-gradient(top, #E9E61A 0%, #AEAC18 100%);
+background-image:linear-gradient(to bottom, #E9E61A 0%, #AEAC18 100%);
         width:100%; 
         font-family:Arial;
         font-size:17px; 
@@ -199,9 +199,9 @@
 }
 
 .voyages{
-        background-color: #CFFF6A;
-        background-image:-webkit-linear-gradient(top, #CFFF6A 0%, #677F35 100%);
-        background-image:linear-gradient(to bottom, #CFFF6A 0%, #677F35 100%);
+background-color: #ACD359;
+background-image:-webkit-linear-gradient(top, #ACD359 0%, #7D9F36 100%);
+background-image:linear-gradient(to bottom, #ACD359 0%, #7D9F36 100%);
         width:100%; 
         font-family:Arial; 
         font-size:17px; 
@@ -345,4 +345,117 @@
 
 .ui-dialog-titlebar{
     background-color : white;
+}
+
+.withIcon{
+    background: url('../icones/Cart.png') no-repeat;
+    background-color: #00AE6A;
+    border: none;
+    font-family: Arial;
+    font-size: 18px;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 120px;
+    height: 41px;
+    color:#FFFFFF;
+    box-shadow: 1px 1px 1px 1px #363636;
+}
+
+
+.withIcon:hover{
+    background: url('../icones/Cart.png') no-repeat;
+    background-color: #00AE6A;
+    cursor: pointer;
+    width: 120px;
+    height: 41px;
+    color:#FFFFFF;
+    border: none;
+    font-family: Arial;
+    font-size: 18px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px 0px #363636;
+}
+
+
+//PANIER
+.boutonPereayer{
+    background-color: #00AE6A;
+    cursor: pointer;
+    width: 120px;
+    height: 41px;
+    color:#FFFFFF;
+    border: none;
+    font-family: Arial;
+    font-size: 16px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px 1px #363636;
+}
+
+
+.boutonPerayer:hover{
+    background-color: #00AE6A;
+    cursor: pointer;
+    width: 120px;
+    height: 41px;
+    color:#FFFFFF;
+    border: none;
+    font-family: Arial;
+    font-size: 16px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px 0px #363636;
+}
+
+
+.boutonPayer{
+    background-color: #00AE6A;
+    color:#FFFFFF;
+    border: none;
+    font-family: Arial;
+    font-size: 18px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px 1px #363636;
+    padding: 3px;
+}
+
+.boutonPayer:hover{
+    background-color: #00AE6A;
+    color:#FFFFFF;
+    border: none;
+    font-family: Arial;
+    font-size: 18px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px 0px #363636;
+    padding: 3px;
+}
+
+.boutonVider{
+    background-color: #B50101;
+    color:#FFFFFF;
+    border: none;
+    font-family: Arial;
+    font-size: 18px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px 1px #363636;
+    padding: 3px;
+}
+
+.boutonVider:hover{
+    background-color: #B50101;
+    color:#FFFFFF;
+    border: none;
+    font-family: Arial;
+    font-size: 18px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px 0px #363636;
+    padding: 3px;
+}
+
+
+.lienPanier{
+    color:blue;  
+}
+
+.lienPanier:hover{
+    color:black;  
 }

@@ -209,8 +209,7 @@
 					</div>
 				</nav>
 				<article>
-					<div id="tri">
-					</div>
+					<h1 style="text-align: center">Les promotions</h1>
 					<div id="display">
 						   <h:form id="form">  
                                 <p:dataGrid var="offre" value="#{offreMBean.getOffresSelectedNormalOrGlobale()}" columns="3"  
@@ -257,12 +256,12 @@
                                                 <p:graphicImage style="width:100%; height:220px;" value="images/#{offreMBean.selectedOffre.image}.png"/>  
                                                 <h:outputText styleClass="panelStyle" value="#{offreMBean.selectedOffre.dscription}" />          
                                             </h:panelGrid>
-                                            <h:panelGrid columns="1" style="width:380px; text-align: center;">
+                                            <h:panelGrid columns="1" style="width:320px; text-align: center;">
                                                 <h:outputText styleClass="panelStyle" value="#{offreMBean.selectedOffre.idE.nomE} " />
                                                 <h:outputText styleClass="panelStyle" value="#{offreMBean.selectedOffre.idE.adrE.numEtRue} #{offreMBean.selectedOffre.idE.adrE.codePostale} #{offreMBean.selectedOffre.idE.adrE.ville}" />
                                                 <h:outputText styleClass="panelStyle" value="#{offreMBean.selectedOffre.idE.resuE}" />
                                                 <br></br>
-                                                <h:panelGrid  columns="2" style="width:380px; text-align: right;">
+                                                <h:panelGrid  columns="2" style="width:320px; text-align: right;">
                                                     <h:outputLabel styleClass="panelStyle" value="Prix : " />  
                                                     <h:outputText style="font-weight: bold; color:#363636; font-size: 14px; font-family: 'Trebuchet MS', Arial, sans-serif;" value="#{offreMBean.selectedOffre.prixActuel}€" />
 
@@ -274,12 +273,10 @@
 
                                                     <h:outputLabel styleClass="panelStyle" value="Validité : " />  
                                                     <h:outputText style="font-weight: bold; color:#363636; font-size: 14px; font-family: 'Trebuchet MS', Arial, sans-serif;" value="#{offreMBean.dateValidite(offreMBean.selectedOffre.dateDebut, offreMBean.selectedOffre.dateFin)}" />
-
-                                                    <h:outputLabel styleClass="panelStyle" value="Quantité max(#{couponMBean.getNbCouponsDisponibles(selectedOffre.idO)}) : " />  
-                                                    <h:outputText style="font-weight: bold; color:#363636; font-size: 14px; font-family: 'Trebuchet MS', Arial, sans-serif;" value="offrembean quantite selec" />                     
+                                                               
                                                 </h:panelGrid>
-                                                <br></br>
-                                                <p:commandButton value="Ajouter" actionListener="#{sessionMBean.ajouterOffreAuPanier(offreMBean.selectedOffre.idO)}" id="withIcon" icon="ui-icon-disk" />
+                                                <br></br>                                   
+                                                    <h:commandButton value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ajouter" actionListener="#{sessionMBean.ajouterOffreAuPanier(offreMBean.selectedOffre.idO)}" styleClass="withIcon" />         
                                             </h:panelGrid>         
                                         </h:panelGrid> 
                                     </p:outputPanel>
@@ -289,32 +286,42 @@
                     </article>
                 </section>         
                 <footer>
-                Conditions d'utilisatio etc... gna gna gna
                 </footer>
             </div>	
 		<aside>			 
-			<div id="articles" class="barredoutils">
-				<ul>
-					<li><a href="#"><img src="icones/Search.png" width="50%" height="50%" /></a>
-					<div id="coucou" class="submenu">
-					<form id="search" action="#" method="get" class="serchform">
-						<input id="searche" type="text" name="q"></input>
-						<button type="submit" title="Chercher" class="button">ok</button>
-						</form>
-					</div>
-					</li>
-					<li><a href="#"><img src="icones/history.png" width="50%" height="50%" /></a></li>
-					<li><a href="#"><img src="icones/Cart.png" width="50%" height="50%" /></a></li>
-				</ul>
-			</div>
-			<div id="options" class="barredoutils">
-				<ul>
-					<li><a href="#"><img src="icones/Globe.png" width="50%" height="50%" /></a></li>
-					<li><a href="#"><img src="icones/Email.png" width="50%" height="50%" /></a></li>
-					<li><a href="#"><img src="icones/Light.png" width="50%" height="50%" /></a></li>
-				</ul>
-			</div>             
-		</aside>
+            <div id="articles" class="barredoutils">
+                <ul>
+                    <li><a href="panier.xhtml"><img class="menus" src="icones/Cart.png" width="80%" height="25%"/></a>
+                        <div id="panier">
+                            <a href="panier.xhtml"><p:outputLabel><h3>Consulter mon panier</h3></p:outputLabel>
+                            </a>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
+            <div id="options" class="barredoutils">
+                <ul>
+                    <li><a href="#"><img src="icones/history.png" width="70%" height="70%" /></a></li>
+                    <li><a href="#"><img src="icones/Search.png" width="70%" height="70%" /></a>
+                        <div id="coucou" class="submenu">
+                            <form id="search" action="#" method="get" class="serchform">
+                                <input id="searche" type="text" name="q"></input>
+                                <button type="submit" title="Chercher" class="button">ok</button>
+                            </form>
+                        </div>
+                    </li>
+                    <br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+                    <li> <a href="mailto:promocoupon.service@gmail.com?subject=subject&amp;"><img src="icones/Email.png" width="70%" height="70%" /></a>
+                        <div id="envoie">
+                            <p:outputLabel><h3>Nous contacter</h3></p:outputLabel>
+                        </div>
+                    </li>
+                    <li><a href="#"><img src="icones/Globe.png" width="70%" height="70%" /></a></li>
+                    <li><a href="#"><img src="icones/Light.png" width="70%" height="70%"/></a></li>
+                </ul>
+            </div>             
+        </aside>
 		
     </h:body>
 </html>

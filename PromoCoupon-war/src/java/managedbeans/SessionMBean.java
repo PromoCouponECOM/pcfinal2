@@ -80,6 +80,14 @@ public class SessionMBean implements Serializable {
         panier = new Panier();
     }
 
+    
+    public String inscriptionConnect(String login, String password){
+        this.loginName = login;
+        this.state = State.ConnectedAsCustomer;
+        return "index";
+    }
+    
+    
     /**
      * returns customer list for display in a datatable DataTable
      *
@@ -107,7 +115,6 @@ public class SessionMBean implements Serializable {
 
     public String disconnect() {
         this.state = State.NotConnected;
-        panier = null;
         return "index";
     }
 
@@ -197,10 +204,15 @@ public class SessionMBean implements Serializable {
     }
     
      public String viderOffrePanier(int idOffre) {
-        List<Long> idCoupons = panier.viderOffrePanier(idOffre);
+        int nbCoupons = getNbCouponsPourOffre(idOffre);
+        /*List<Long> idCoupons = panier.viderOffrePanier(idOffre);
         for(Long idCoupon : idCoupons){
         Coupon coupon = CM.getCouponById(idCoupon);
         CM.modifyCouponStatus(coupon, (short) 1);
+        }
+        return "";*/
+        for (int i=0; i<nbCoupons; i++){
+            retirerOffreDuPanier(idOffre);
         }
         return "";
     }
@@ -209,5 +221,9 @@ public class SessionMBean implements Serializable {
         for(int idOffre : panier.getOffres())
             viderOffrePanier(idOffre);
         return "";
+    }
+    
+    public int calculPrixTotalCouponsOffre(int nbCoupons,int prixCoupon){
+        return nbCoupons*prixCoupon;
     }
 }

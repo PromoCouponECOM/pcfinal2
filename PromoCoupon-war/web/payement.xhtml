@@ -3,12 +3,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head> 
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="css/menu.css" />
-        <link rel="stylesheet" href="css/villes.css" />
+        <link rel="stylesheet" href="css/payement.css" />
         <link rel="stylesheet" href="css/toolbar.css" />
         <script type="text/javascript" src="js/hiddenaddress.js"></script>
         <script type="text/javascript" src="js/creditcard.js"></script>
@@ -35,86 +34,110 @@
                 ;
             }
         </script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('#boxLogin').hide(); //Si l'utilisateur a javascript on cache la box de login pour pas surcharger la page
+        		<script type="text/javascript">
+        $.fn.fermerBox = function() {
+            $('#boxLogin').fadeOut(400);
+        };
+        $.fn.clickConnection = (function(){
+            if ($('#boxLogin').is(':visible')) {
+                $('#boxLogin').fadeOut(400);
+            }
+            else {     
+                $('#boxLogin').fadeIn(400);
+            }
+		});
+		$(document).ready(function(){
+			$('#boxLogin').hide(); //Si l'utilisateur a javascript on cache la box de login pour pas surcharger la page
 
-                $('.click_connect').click(function() {
-                    $('#boxLogin').fadeIn(400);
-                });
+			$('.click_connect').click(function(){
+                if ($('#boxLogin').is(':visible')) {
+					$('#boxLogin').fadeOut(400);
+				}
+				else {     
+					$('#boxLogin').fadeIn(400);
+				}
+			});
 
-                $('.fermer').click(function() {
-                    $('#boxLogin').fadeOut(400);
-                });
+			$('.fermer').click(function(){
+				$('#boxLogin').fadeOut(400);
+			});
 
-                $('#mdpPerdu').click(function() {
-                    erreur("mdp_perdu");
-                    return false;
-                });
+			$('#mdpPerdu').click(function(){
+				erreur("mdp_perdu");
+				return false;
+			});
 
-                $('.field').focus(function() { //Supprime les textes par défauts des input lors du click sur ceux-ci
-                    if ($(this).val() == 'Email' || $(this).val() == 'Mot de passe' || $(this).val() == 'Rechercher') {
-                        $(this).val('');
-                    }
-                });
-
-                $('#listeVille').hide(); //Si l'utilisateur a javascript on cache l'affichage des villes
-
-                $('.click_display_ville').click(function() {
-                    if ($('#listeVille').is(':visible')) {
-                        $('#listeVille').fadeOut(400);
-                    }
-                    else {
-                        $('#listeVille').fadeIn(400);
-                    }
-                });
-            });
-        </script>
+			$('.field').focus(function(){ //Supprime les textes par défauts des input lors du click sur ceux-ci
+				if($(this).val()=='Email' || $(this).val()=='Mot de passe' || $(this).val()=='Rechercher'){
+					$(this).val('');
+				}
+			});
+			
+			$('#listeVille').hide(); //Si l'utilisateur a javascript on cache l'affichage des villes
+			
+			$('.click_display_ville').click(function(){
+				if ($('#listeVille').is(':visible')) {
+					$('#listeVille').fadeOut(400);
+				}
+				else {
+					$('#listeVille').fadeIn(400);
+				}
+			});
+		});
+		</script>
+		<script type="text/javascript" src="js/lieu.js"></script>
+		
         <title>Paiement</title>
     </h:head>
-    <body>
-        <div id="wrapper">
-            <header>
-                <nav>
-                    <div id="titre_principal">
-                        <a href="index.xhtml"><span id="promo">Promo</span><span id="coupon">Coupon</span></a>
-                    </div>
-                    <div id="navigation">
-                        <ul>
-                            <li><a href="index.xhtml" style="color:#FFFFFF;">Accueil</a></li>
-                            <li><a href="touteslespromos.xhtml" style="color:#FFFFFF;"> Toutes les promos</a></li>
-                            <li><a href="verschezmoi.xhtml" style="color:#FFFFFF;">Vers chez moi</a></li>
-                        </ul>
-                    </div>
-                    <div id="compte">						
-                        <a href="#" class="click_connect">S'identifier</a> | <a href="signup.xhtml">S'inscrire</a>
-                    </div>
-                    <div id="boxLogin">
-                        <h3>Votre Compte</h3>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="fermer" class="fermer" href="#">fermer</a>
-                        <form action="" method="post" name="form_connexion">
-                            <input class="field" name="email" type="text" style="width:150px; height:13px;" value="Email" />
-                            <input class="field" name="password" type="password" style="width:150px; height:13px;" value="Mot de passe" />
-                            <input name="submit" type="submit" value="ok"/>
-                        </form>
-                        <a id="mdpPerdu" href="#" style="font-size:11px;">Mot de passe perdu ?</a>
-                    </div>
-                </nav>
-            </header>
+    <h:body>
+       
+		<div id="wrapper">
+			<header>
+				<nav>
+					<div id="titre_principal">
+						<a href="index.xhtml"><span id="promo">Promo</span><span id="coupon">Coupon</span></a>
+					</div>
+					<div id="navigation">
+						<ul><h:form> 
+							<li><a href="index.xhtml" style="color:#FFFFFF;">Accueil</a></li>
+							<li><h:commandLink action="#{offreMBean.showTypeOffre()}" style="color:#FFFFFF;">Toutes les promos<f:setPropertyActionListener target="#{offreMBean.type}" value="tous" /></h:commandLink></li>
+							<li><a href="verschezmoi.xhtml" style="color:#FFFFFF;">Vers chez moi</a></li>
+						</h:form> </ul>
+					</div>
+					 <h:panelGroup id="compte">
+                        <c:choose>
+                            <c:when test="#{sessionMBean.isConnectedAsCustomer()}">
+                                <h:form id="compteLogged"><img src="icones/user_32.png" style="width:18px; height:18px;" alt="compte"/>&nbsp;<a href="userAccount.xhtml">Mon compte</a> |  <h:commandLink action="#{sessionMBean.disconnect()}">D&eacute;connexion</h:commandLink></h:form>
+                            </c:when>
+                            <c:otherwise>
+                                <span id="compteNotLogged"><img src="icones/user_32.png" style="width:18px; height:18px;" alt="compte"/>&nbsp;<a href="#" onclick="$(this).clickConnection();">S'identifier</a> | <a href="signup.xhtml">S'inscrire</a></span>                   
+                            </c:otherwise>
+                        </c:choose>    
+					</h:panelGroup>
+					<div id="boxLogin">
+						<h3>Votre Compte</h3>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="fermer" class="fermer" href="#"><img src="icones/close_32.png" style="width:18px; height:18px;" alt="fermer"/></a>                       
+						<h:form id="formID"> 
+                            e-mail
+                            <br></br>
+							<h:inputText class="field" title="email" id="email" value="#{sessionMBean.loginNameTRY}" requiredMessage="Saisir votre e-mail" required="true" size="24" maxlength="24" style="width:150px; height:13px;"></h:inputText>
+                            <br></br>mot de passe<br></br>
+                            <h:inputSecret class="field" title="password" id="password" value="#{sessionMBean.passwordTRY}" requiredMessage="Saisir votre mot de passe" redisplay="true" required="true" size="24" maxlength="24" style="width:150px; height:13px;"></h:inputSecret>
+                            <p:commandButton id="submit" onclick="$(this).fermerBox();" value="" styleClass="submit" actionListener="#{sessionMBean.tryConnection()}" update=":compte"/>
+						</h:form>
+						<a id="mdpPerdu" href="#" style="font-size:11px;">Mot de passe perdu ?</a>
+					</div>
+				</nav>
+			</header>
 
             <section>
                 <article>
-                    <div id="client_title">
-                        Vous-êtes un nouveau client?
-                    </div>
-                    <div id="client_section">
-                        Inscrivez-vous dès maintenant est profitez nos nombreuses offres ! Ba ouais morray.
-                    </div>
+                    <h1 style="text-align: center">Paiement</h1>
                     <h:form>
                         <table align="center" cellspacing="10">
                             <tbody>
                                 <tr>
-                                    <td class="titres" align="left" colspan="4" ><b> Saisir vorte carte paiement </b></td>							
+                                    <td class="titres" align="left" colspan="4" ><b> Saisir vorte carte de paiement </b></td>							
                                 </tr>
                                 <tr>
                                     <td align="right"><b> Type de carte; :*</b></td>
@@ -177,7 +200,7 @@
                                 </tr>
                                 <tr>
 
-                                    <td colspan="4" align="center"><button type="button" class="bouton" value="Valider" onclick="testCreditCard();"  ></button>Valider</td>									
+                                    <td colspan="4" align="center"><input type="button" class="bouton" value="Valider" onclick="testCreditCard();"  /></td>									
                                 </tr>
                             </tbody>
                         </table>
@@ -185,34 +208,44 @@
                 </article>
             </section>
             <footer>
-                Conditions d'utilisatio etc... gna gna gna
             </footer>
         </div>
 
         <aside>			 
             <div id="articles" class="barredoutils">
                 <ul>
-                    <li><a href="#"><img src="icones/Search.png" width="50%" height="50%" /></a>
+                    <li><a href="panier.xhtml"><img class="menus" src="icones/Cart.png" width="80%" height="25%"/></a>
+                        <div id="panier">
+                            <a href="panier.xhtml"><p:outputLabel><h3>Consulter mon panier</h3></p:outputLabel>
+                            </a>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
+            <div id="options" class="barredoutils">
+                <ul>
+                    <li><a href="#"><img src="icones/history.png" width="70%" height="70%" /></a></li>
+                    <li><a href="#"><img src="icones/Search.png" width="70%" height="70%" /></a>
                         <div id="coucou" class="submenu">
-                            <form id="search" action="#" methode="get" class="serchform">
+                            <form id="search" action="#" method="get" class="serchform">
                                 <input id="searche" type="text" name="q"></input>
                                 <button type="submit" title="Chercher" class="button">ok</button>
                             </form>
                         </div>
                     </li>
-                    <li><a href="#"><img src="icones/history.png" width="50%" height="50%" /></a></li>
-                    <li><a href="#"><img src="icones/Cart.png" width="50%" height="50%" /></a></li>
-                </ul>
-            </div>
-            <div id="options" class="barredoutils">
-                <ul>
-                    <li><a href="#"><img src="icones/Globe.png" width="50%" height="50%" /></a></li>
-                    <li><a href="#"><img src="icones/Email.png" width="50%" height="50%" /></a></li>
-                    <li><a href="#"><img src="icones/Light.png" width="50%" height="50%" /></a></li>
+                    <br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+                    <li> <a href="mailto:promocoupon.service@gmail.com?subject=subject&amp;"><img src="icones/Email.png" width="70%" height="70%" /></a>
+                        <div id="envoie">
+                            <p:outputLabel><h3>Nous contacter</h3></p:outputLabel>
+                        </div>
+                    </li>
+                    <li><a href="#"><img src="icones/Globe.png" width="70%" height="70%" /></a></li>
+                    <li><a href="#"><img src="icones/Light.png" width="70%" height="70%"/></a></li>
                 </ul>
             </div>             
         </aside>
 
-    </body>
+    </h:body>
 </html>
 

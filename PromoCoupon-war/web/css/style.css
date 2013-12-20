@@ -88,9 +88,9 @@ header nav li
 	display: block;
 	border-radius: 5px;
 	box-shadow: 0px 2px 5px #1c1a19;	
-	background-color: #004D2F;
-	background-image:-webkit-linear-gradient(top, #00AE6A 0%, #004D2F 100%);
-	background-image:linear-gradient(to bottom, #00AE6A 0%, #004D2F 100%);
+	background-color: #00AE6A
+	background-image:-webkit-linear-gradient(top, #00AE6A 0%, #006F44 100%);
+	background-image:linear-gradient(to bottom, #00AE6A 0%, #006F44 100%);
 	padding: 1em 1em 1em 1em;
 }
 
@@ -259,7 +259,7 @@ article{
 
 
 /********** ASIDE **********/
-#articles
+/*#articles
 {
 	margin-top: 150px;
     height:250px;
@@ -271,7 +271,7 @@ article{
 {
 	text-align: left;
 	font-size: 14px;
-}
+}*/
 
 
 
@@ -288,3 +288,6 @@ footer
 	border-left:solid 2px #363636;
 	border-right:solid 2px #363636;
 }
+
+
+

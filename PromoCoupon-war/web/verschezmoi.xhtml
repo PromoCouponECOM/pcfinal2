@@ -81,7 +81,7 @@
 
                 map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-                var infowindow = new google.maps.InfoWindow({content: 'contentString'});
+                var infowindow = new google.maps.InfoWindow({content: 'content', maxWidth: 320});
 
                 for (var i in arrayAddress) {
                     convertAddress(arrayAddress[i], infowindow, arrayContent[i]);
@@ -293,7 +293,7 @@
 				</nav>
                 <article>
                     <div id="best" style="width: 100%; height: 100%">
-                        <h1></h1>
+                        <h1 style="text-align: center">Vers chez moi</h1>
                         <div id="map-canvas"  style="width: 80%; height: 80%; min-height:500px; margin:0 auto; ">
                             <input id="adr" value="#{offreMBean.offreList}" type="hidden"></input>
                             <input id="content" value="#{offreMBean.offreContent}" type="hidden"></input>
@@ -301,39 +301,48 @@
                     </div>
                     <div id="news">
                         <h1>Le d&eacute;tail des promos vers chez moi</h1>
-                        <p>Mettre les promotions vers chez moi ici</p>
+                        <p>les promotions vers chez moi</p>
                     </div>
                 </article>
             </section>         
             <footer>
-                Conditions d'utilisatio etc... gna gna gna
             </footer>
         </div>
 
         <aside>			 
-			<div id="articles" class="barredoutils">
-				<ul>
-					<li><a href="#"><img src="icones/Search.png" width="50%" height="50%" /></a>
-					<div id="coucou" class="submenu">
-					<form id="search" action="#" method="get" class="serchform">
-						<input id="searche" type="text" name="q"></input>
-						<button type="submit" title="Chercher" class="button">ok</button>
-						</form>
-					</div>
-					</li>
-					<li><a href="#"><img src="icones/history.png" width="50%" height="50%" /></a></li>
-					<li><a href="#"><img src="icones/Cart.png" width="50%" height="50%" /></a></li>
-				</ul>
-			</div>
-			<div id="options" class="barredoutils">
-				<ul>
-					<li><a href="#"><img src="icones/Globe.png" width="50%" height="50%" /></a></li>
-					<li><a href="#"><img src="icones/Email.png" width="50%" height="50%" /></a></li>
-					<li><a href="#"><img src="icones/Light.png" width="50%" height="50%" /></a></li>
-				</ul>
-			</div>             
-		</aside>
-         <p:notificationBar position="bottom" effect="slide" widgetVar="bar" styleClass="top"> <h:outputText value="this is a beautiful footer!" style="color:#FFCC00;font-size:36px;" /> </p:notificationBar>
+            <div id="articles" class="barredoutils">
+                <ul>
+                    <li><a href="panier.xhtml"><img class="menus" src="icones/Cart.png" width="80%" height="25%"/></a>
+                        <div id="panier">
+                            <a href="panier.xhtml"><p:outputLabel><h3>Consulter mon panier</h3></p:outputLabel>
+                            </a>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
+            <div id="options" class="barredoutils">
+                <ul>
+                    <li><a href="#"><img src="icones/history.png" width="70%" height="70%" /></a></li>
+                    <li><a href="#"><img src="icones/Search.png" width="70%" height="70%" /></a>
+                        <div id="coucou" class="submenu">
+                            <form id="search" action="#" method="get" class="serchform">
+                                <input id="searche" type="text" name="q"></input>
+                                <button type="submit" title="Chercher" class="button">ok</button>
+                            </form>
+                        </div>
+                    </li>
+                    <br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+                    <li> <a href="mailto:promocoupon.service@gmail.com?subject=subject&amp;"><img src="icones/Email.png" width="70%" height="70%" /></a>
+                        <div id="envoie">
+                            <p:outputLabel><h3>Nous contacter</h3></p:outputLabel>
+                        </div>
+                    </li>
+                    <li><a href="#"><img src="icones/Globe.png" width="70%" height="70%" /></a></li>
+                    <li><a href="#"><img src="icones/Light.png" width="70%" height="70%"/></a></li>
+                </ul>
+            </div>             
+        </aside>
 
     </h:body>
 </html>

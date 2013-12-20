@@ -9,8 +9,6 @@
 		<meta charset="utf-8" />
         <link rel="stylesheet" href="css/userAccount.css" />
 		<link rel="stylesheet" href="css/menu.css" />
-		<link rel="stylesheet" href="css/villes.css" />
-        <link rel="stylesheet" href="css/listeOffres.css" />
 		<link rel="stylesheet" href="css/toolbar.css" />
         
 		<script type="text/javascript">
@@ -112,7 +110,7 @@
 			<section>
 				<nav>
 					<div id="userNav">
-						<ul id="userCategories">
+						<ul class="menu-deroulant">
 							<li><a href="userAccount.xhtml">Modifier mes informations personnelles</a>
 							</li>
 							<li><a href="userAccountLogs.xhtml">Modifier mon identifiant/Changer mon mot de passe</a>
@@ -126,7 +124,9 @@
 				</nav>
 				<article>
 					<div id="page">
-						<b> Vous pouvez modifier vos informations puis enregistrer ces changements </b>
+                        <h1 style="margin-left: 34%">Mon compte</h1>
+                        <br></br>
+						Vous pouvez modifier vos informations puis enregistrer ces changements
 					    <form method="post" action="modif_succes.xhtml" onsubmit="return verifchamps()">
 						<table align="center" cellspacing="10">
 							<tbody>
@@ -171,33 +171,43 @@
 			</section>
 				
 			<footer>
-			Conditions d'utilisatio etc... gna gna gna
 			</footer>
 		</div>
 		
 		<aside>			 
-			<div id="articles" class="barredoutils">
-				<ul>
-					<li><a href="#"><img src="icones/Search.png" width="50%" height="50%" /></a>
-					<div id="coucou" class="submenu">
-					<form id="search" action="#" method="get" class="serchform">
-						<input id="searche" type="text" name="q"></input>
-						<button type="submit" title="Chercher" class="button">ok</button>
-						</form>
-					</div>
-					</li>
-					<li><a href="#"><img src="icones/history.png" width="50%" height="50%" /></a></li>
-					<li><a href="#"><img src="icones/Cart.png" width="50%" height="50%" /></a></li>
-				</ul>
-			</div>
-			<div id="options" class="barredoutils">
-				<ul>
-					<li><a href="#"><img src="icones/Globe.png" width="50%" height="50%" /></a></li>
-					<li><a href="#"><img src="icones/Email.png" width="50%" height="50%" /></a></li>
-					<li><a href="#"><img src="icones/Light.png" width="50%" height="50%" /></a></li>
-				</ul>
-			</div>             
-		</aside>
+            <div id="articles" class="barredoutils">
+                <ul>
+                    <li><a href="panier.xhtml"><img class="menus" src="icones/Cart.png" width="80%" height="25%"/></a>
+                        <div id="panier">
+                            <a href="panier.xhtml"><p:outputLabel><h3>Consulter mon panier</h3></p:outputLabel>
+                            </a>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
+            <div id="options" class="barredoutils">
+                <ul>
+                    <li><a href="#"><img src="icones/history.png" width="70%" height="70%" /></a></li>
+                    <li><a href="#"><img src="icones/Search.png" width="70%" height="70%" /></a>
+                        <div id="coucou" class="submenu">
+                            <form id="search" action="#" method="get" class="serchform">
+                                <input id="searche" type="text" name="q"></input>
+                                <button type="submit" title="Chercher" class="button">ok</button>
+                            </form>
+                        </div>
+                    </li>
+                    <br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+                    <li> <a href="mailto:promocoupon.service@gmail.com?subject=subject&amp;"><img src="icones/Email.png" width="70%" height="70%" /></a>
+                        <div id="envoie">
+                            <p:outputLabel><h3>Nous contacter</h3></p:outputLabel>
+                        </div>
+                    </li>
+                    <li><a href="#"><img src="icones/Globe.png" width="70%" height="70%" /></a></li>
+                    <li><a href="#"><img src="icones/Light.png" width="70%" height="70%"/></a></li>
+                </ul>
+            </div>             
+        </aside>
 		
     </h:body>
 </html>

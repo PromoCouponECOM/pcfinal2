@@ -212,15 +212,18 @@
 					<div id="best">
 					</div>
 					<div id="news">
-                        <h1>Mon Panier</h1>
+                        <h1 style="text-align: center">Mon Panier</h1>
 						   <h:form id="form"> 
+                                <h:panelGrid columns="1" style="text-align: right; width:100%;">
+                                    <h:commandLink styleClass="boutonVider" action="#{sessionMBean.viderPanierComplet()}" >Vider le panier</h:commandLink>
+                                </h:panelGrid> 
                                 <h:panelGrid columns="5" style="width:100%;">
                                     <p:dataGrid var="offre" value="#{sessionMBean.getOffresPanier()}" columns="1"  
                                         rows="8" paginator="true"  
                                         paginatorTemplate="">
                                         <p:panel>
                                             <h:panelGrid columns="5" style="width:100%;" > 
-                                                <h:panelGrid columns="1" style="width:100%;" styleClass="#{offre.categorieGlobale}"  >
+                                                <h:panelGrid columns="1" styleClass="#{offre.categorieGlobale}"  >
                                                     <h:outputText value="#{offre.title}" />
                                                 </h:panelGrid>
                                                 <h:panelGrid columns="1" style="width:100%;" styleClass="#{offre.categorieGlobale}">
@@ -236,52 +239,66 @@
                                                     <h:outputText value="Retirer du panier" styleClass="#{offre.categorie.nomCateg}"/>
                                                 </h:panelGrid>
                     
-                                                <p:graphicImage value="images/#{offre.image}.png" />
-                                                <h:panelGrid columns="3">
-                                                    <p:commandLink rendered="#{sessionMBean.getNbCouponsPourOffre(offre.idO)!=1}" action="#{sessionMBean.retirerOffreDuPanier(offre.idO)}"  update=":form">-</p:commandLink>
-                                                    <h:outputText value="-" rendered="#{sessionMBean.getNbCouponsPourOffre(offre.idO)==1}"/>
+                                                <p:graphicImage value="images/#{offre.image}.png" style="width:360px; height:224px;"/>
+                                                <h:panelGrid columns="4">
+                                                    <p:commandLink style="color: #0000cc; font-size: 20px;" rendered="#{sessionMBean.getNbCouponsPourOffre(offre.idO)!=1}" action="#{sessionMBean.retirerOffreDuPanier(offre.idO)}"  update=":form">-</p:commandLink>
+                                                    <h:outputText style="color: #0000cc; font-size: 20px;" value="-" rendered="#{sessionMBean.getNbCouponsPourOffre(offre.idO)==1}"/>
                                                     <h:outputText id="nombreExemplaire" value="&nbsp;#{sessionMBean.getNbCouponsPourOffre(offre.idO)}&nbsp;"/>
-                                                    <p:commandLink action="#{sessionMBean.ajouterOffreAuPanier(offre.idO)}"  update=":form">+</p:commandLink>
+                                                    <p:commandLink style="color: #0000cc; font-size: 20px;" action="#{sessionMBean.ajouterOffreAuPanier(offre.idO)}"  update=":form">+</p:commandLink>
+                                                    <h:outputText id="maxCoupons" value="&nbsp;(restant:#{couponMBean.getNbCouponsDisponibles(offre.idO)})"/>
                                                 </h:panelGrid> 
                                                 <h:outputText id="prixActuel" value="#{offre.prixActuel}€"/>
-                                                <h:outputText id="Montant" value="Faire Calcul"/>
-                                                <p:commandLink action="#{sessionMBean.viderOffrePanier(offre.idO)}"  update=":form">Retirer</p:commandLink>
+                                                <h:outputText id="Montant" value="#{sessionMBean.calculPrixTotalCouponsOffre(sessionMBean.getNbCouponsPourOffre(offre.idO),offre.prixActuel)}€"/>
+                                                <p:commandLink style="color: #0000cc;" action="#{sessionMBean.viderOffrePanier(offre.idO)}"  update=":form">Retirer cette offre</p:commandLink>
                                             </h:panelGrid>
-
                                         </p:panel>
                                     </p:dataGrid>
                                 </h:panelGrid>
+                                <h:panelGrid columns="2" style="text-align: right; width:100%; height: 40px;">
+                                    <h:outputText style="font-family: Arial; font-size: 22px;" id="prixActuel" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prix total : #{sessionMBean.getPrixTotalPanier()}€"/>
+                                    <h:commandLink styleClass="boutonPayer" action="payement" >Aller au paiement</h:commandLink>
+                                </h:panelGrid> 
                             </h:form>
                         </div>
                     </article>
                 </section>         
                 <footer>
-                Conditions d'utilisatio etc... gna gna gna
                 </footer>
             </div>	
 		<aside>			 
-			<div id="articles" class="barredoutils">
-				<ul>
-					<li><a href="#"><img src="icones/Search.png" width="50%" height="50%" /></a>
-					<div id="coucou" class="submenu">
-					<form id="search" action="#" method="get" class="serchform">
-						<input id="searche" type="text" name="q"></input>
-						<button type="submit" title="Chercher" class="button">ok</button>
-						</form>
-					</div>
-					</li>
-					<li><a href="#"><img src="icones/history.png" width="50%" height="50%" /></a></li>
-					<li><a href="#"><img src="icones/Cart.png" width="50%" height="50%" /></a></li>
-				</ul>
-			</div>
-			<div id="options" class="barredoutils">
-				<ul>
-					<li><a href="#"><img src="icones/Globe.png" width="50%" height="50%" /></a></li>
-					<li><a href="#"><img src="icones/Email.png" width="50%" height="50%" /></a></li>
-					<li><a href="#"><img src="icones/Light.png" width="50%" height="50%" /></a></li>
-				</ul>
-			</div>             
-		</aside>
+            <div id="articles" class="barredoutils">
+                <ul>
+                    <li><a href="panier.xhtml"><img class="menus" src="icones/Cart.png" width="80%" height="25%"/></a>
+                        <div id="panier">
+                            <a href="panier.xhtml"><p:outputLabel><h3>Consulter mon panier</h3></p:outputLabel>
+                            </a>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
+            <div id="options" class="barredoutils">
+                <ul>
+                    <li><a href="#"><img src="icones/history.png" width="70%" height="70%" /></a></li>
+                    <li><a href="#"><img src="icones/Search.png" width="70%" height="70%" /></a>
+                        <div id="coucou" class="submenu">
+                            <form id="search" action="#" method="get" class="serchform">
+                                <input id="searche" type="text" name="q"></input>
+                                <button type="submit" title="Chercher" class="button">ok</button>
+                            </form>
+                        </div>
+                    </li>
+                    <br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+                    <li> <a href="mailto:promocoupon.service@gmail.com?subject=subject&amp;"><img src="icones/Email.png" width="70%" height="70%" /></a>
+                        <div id="envoie">
+                            <p:outputLabel><h3>Nous contacter</h3></p:outputLabel>
+                        </div>
+                    </li>
+                    <li><a href="#"><img src="icones/Globe.png" width="70%" height="70%" /></a></li>
+                    <li><a href="#"><img src="icones/Light.png" width="70%" height="70%"/></a></li>
+                </ul>
+            </div>             
+        </aside>
 		
     </h:body>
 </html>

@@ -26,6 +26,7 @@ public class Panier {
         for (Item item : this.commande) {
             if (item.getIdOffre() == idOffre) {
                 item.addCoupon(idCoupon);
+                this.prixTotal+=prix;
                 return;
             }
         }

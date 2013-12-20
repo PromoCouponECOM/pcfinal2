@@ -1,3 +1,293 @@
-.hidden{
-	display:none;
+/********** BACKGROUNDS **********/
+/*background*/
+body
+{
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+	background-color : #FFFEFF;
+	width:100%;
 }
+
+/*background du site*/
+#wrapper 
+{
+	top: 0;
+	background-color : #176CA7;
+	border-radius: 5px;
+	width: 95%;
+	left: 1%;
+	position: absolute;
+}
+
+wrapper, aside
+{
+    display: inline-block;
+}
+
+a
+{
+	text-decoration:none;
+}
+
+/********** HEADER **********/
+/*position du Header*/
+header
+{
+	position: relative;
+	height:86px;
+	background-color: #176CA7;
+	background-image:-webkit-linear-gradient(top, #0D588C 0%, #176CA7 100%);
+	background-image:linear-gradient(to bottom, #0D588C 0%, #176CA7 100%);
+	border-left:solid 2px #363636;
+	border-right:solid 2px #363636;
+}
+
+header nav li
+{
+    display: inline-block;
+}
+
+#titre_principal, #navigation, #compte
+{
+    display: inline-block;
+}
+
+/*logo PromoCoupon*/
+#titre_principal
+{
+	text-align: left;
+	margin-left: 2%;
+	font-size: 24px;
+	font-weight: bold;
+}
+
+#titre_principal #promo
+{
+	color: #00AE6A;
+}
+
+#titre_principal #coupon
+{
+	color: #FFFFFF;
+}
+
+
+/*barre de navigation : Accueil, Toutes les promos, Vers chez moi*/
+#navigation
+{
+	margin-left: 16%;
+	text-align: center;
+}
+
+#navigation li 
+{
+	width:168px;
+}
+
+#navigation li  a
+{
+	display: block;
+	border-radius: 5px;
+	box-shadow: 0px 2px 5px #1c1a19;	
+	background-color: #00AE6A
+	background-image:-webkit-linear-gradient(top, #00AE6A 0%, #006F44 100%);
+	background-image:linear-gradient(to bottom, #00AE6A 0%, #006F44 100%);
+	padding: 1em 1em 1em 1em;
+}
+
+#navigation li  a:hover
+{
+	color: #000000;
+	border-radius: 5px;
+	-moz-box-shadow: 0px 2px 5px #1c1a19;
+	-webkit-box-shadow: 0px 2px 5px #1c1a19;
+	box-shadow: 0px 2px 5px #1c1a19;
+	background: #00AE6A;
+	padding: 1em 1em 1em 1em;
+}
+
+/*connection au compte*/
+#compte{
+    width:300px;
+    text-align: right;
+}
+
+#compteLogged
+{
+	font-size: 12px;
+	color: #00AE6A;
+}
+
+#compteNotLogged
+{
+	font-size: 12px;
+	color: #00AE6A;
+}
+
+#compte a
+{
+	color: #FFFFFF;
+}
+
+#boxLogin
+{	
+	position: relative;
+	width:200px;
+	height:130px;
+	z-index: 1;
+	margin-left: 84%;
+	margin-top: -10px;
+	background-color: #176CA7;
+	box-shadow: 0px 2px 5px #1c1a19;
+    border-radius: 5px;
+}
+
+#formID
+{
+   margin-top:-8px;
+   font-size: 14px; 
+}
+
+#boxLogin h3, #fermer
+{
+    margin-top: -20px;
+    display: inline-block;
+}
+
+#fermer
+{
+    margin-left: 24px;
+    margin-top: 2px;
+    font-size: 12px;
+}
+
+#submit #password{
+    display: inline-block;
+}
+
+.submit {
+    vertical-align: -4px;
+    margin-left: 2px;
+    background : none;
+    background-image: url(../icones/boxLogin_btn.gif);
+    background-repeat: no-repeat;
+    width: 17px;
+    height: 17px;
+    border: none;
+    box-shadow: none;
+}
+.submit.ui-state-hover {
+    background : none;
+    background-image: url(../icones/boxLogin_btn.gif);
+    background-repeat: no-repeat;
+    width: 17px;
+    height: 17px;
+    border: none;
+    box-shadow: none;
+}
+.submit.ui-state-active {
+    background : none;
+    background-image: url(../icones/boxLogin_btn.gif);
+    background-repeat: no-repeat;
+    width: 17px;
+    height: 17px;
+    border: none;
+    box-shadow: none;
+}
+
+
+
+/********** SECTION **********/
+/*disposition générale*/
+section nav, article
+{
+    display: inline-block;
+    vertical-align: top;
+    margin: 0;
+}
+
+section
+{	height:100%;
+	border-left:solid 2px #363636;
+	border-right:solid 2px #363636;
+}
+
+/*menu categories*/
+section nav
+{	
+	height: 100%;
+	width: 220px;
+	position: relative;
+	background-color : #176CA7;
+}
+
+/*menu choisir la ville */
+
+
+/*menu categories*/
+
+
+/*barre de recherche*/
+#recherche
+{
+	margin-top: 40px;
+	height:48px;
+	text-align: center;
+	font-size: 10px;
+}
+
+/*affichage des promotions*/
+article{
+   width: 100%;
+   background-color : #FFFFFF;
+   border-left:solid 2px #363636;
+   margin-left : -5px;
+}
+
+
+/*barre coté droit*/
+/*aside
+{
+	position:relative;
+    width: 155px;
+	height:601px;
+    background-color: #706b64;
+    box-shadow: 0px 2px 5px #1c1a19;
+    border-radius: 5px;
+}*/
+
+
+
+
+/********** ASIDE **********/
+/*#articles
+{
+	margin-top: 150px;
+    height:250px;
+	text-align: left;
+	font-size: 14px;
+}
+
+#options
+{
+	text-align: left;
+	font-size: 14px;
+}*/
+
+
+
+/********** FOOTER **********/
+footer 
+{
+	position: relative;
+	height:100px;
+    
+	background-color: #0D588C;
+	background-image:-webkit-linear-gradient(top, #176CA7 0%, #0D588C 100%);
+	background-image:linear-gradient(to bottom, #176CA7 0%, #0D588C 100%);
+    
+	border-left:solid 2px #363636;
+	border-right:solid 2px #363636;
+}
+
+
+

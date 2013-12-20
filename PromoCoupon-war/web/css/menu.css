@@ -61,76 +61,76 @@ max-height:20em;
 /* background des liens menus */
 .menu-deroulant li:first-child{
 background-color: #65537A;
-background-image:-webkit-linear-gradient(top, #65537A 0%, #2A2333 100%);
-background-image:linear-gradient(to bottom, #65537A 0%, #2A2333 100%);
+background-image:-webkit-linear-gradient(top, #65537A 0%, #3D3249 100%);
+background-image:linear-gradient(to bottom, #65537A 0%, #3D3249 100%);
 }
 .menu-deroulant li:nth-child(2){
 background-color: #729EBF;
-background-image: -webkit-linear-gradient(top, #729EBF 0%, #333A40 100%);
-background-image:linear-gradient(to bottom, #729EBF 0%, #333A40 100%);
+background-image: -webkit-linear-gradient(top, #729EBF 0%, #527188 100%);
+background-image:linear-gradient(to bottom, #729EBF 0%, #527188 100%);
 }
 .menu-deroulant li:nth-child(3){
-background-color: #F80098;
-background-image:-webkit-linear-gradient(top, #F80098 0%, #6A0041 100%);
-background-image:linear-gradient(to bottom, #F80098 0%, #6A0041 100%);
+background-color: #E38AC1;
+background-image:-webkit-linear-gradient(top, #E38AC1 0%, #A75387 100%);
+background-image:linear-gradient(to bottom, #E38AC1 0%, #A75387 100%);
 }
 .menu-deroulant li:nth-child(4){
-background-color: #B2B2B2;
-background-image:-webkit-linear-gradient(top, #B2B2B2 0%, #525252 100%);
-background-image:linear-gradient(to bottom, #B2B2B2 0%, #525252 100%);
+background-color: #AAAAAA;
+background-image:-webkit-linear-gradient(top, #AAAAAA 0%, #696969 100%);
+background-image:linear-gradient(to bottom, #AAAAAA 0%, #696969 100%);
 }
 .menu-deroulant li:nth-child(5){
-background-color: #00E035;
-background-image:-webkit-linear-gradient(top, #00E035 0%, #005E16 100%);
-background-image:linear-gradient(to bottom, #00E035 0%, #005E16 100%);
+background-color: #18D946;
+background-image:-webkit-linear-gradient(top, #18D946 0%, #139732 100%);
+background-image:linear-gradient(to bottom, #18D946 0%, #139732 100%);
 }
 .menu-deroulant li:nth-child(6){
-background-color: #FF2121;
-background-image:-webkit-linear-gradient(top, #FF2121 0%, #5B0000 100%);
-background-image:linear-gradient(to bottom, #FF2121 0%, #5B0000 100%);
+background-color: #CD3030;
+background-image:-webkit-linear-gradient(top, #CD3030 0%, #8F1515 100%);
+background-image:linear-gradient(to bottom, #CD3030 0%, #8F1515 100%);
 }
 .menu-deroulant li:nth-child(7){
-background-color: #FFFC00;
-background-image:-webkit-linear-gradient(top, #FFFC00 0%, #797A00 100%);
-background-image:linear-gradient(to bottom, #FFFC00 0%, #797A00 100%);
+background-color: #E9E61A;
+background-image:-webkit-linear-gradient(top, #E9E61A 0%, #AEAC18 100%);
+background-image:linear-gradient(to bottom, #E9E61A 0%, #AEAC18 100%);
 }
 .menu-deroulant li:nth-child(8){
-background-color: #CFFF6A;
-background-image:-webkit-linear-gradient(top, #CFFF6A 0%, #677F35 100%);
-background-image:linear-gradient(to bottom, #CFFF6A 0%, #677F35 100%);
+background-color: #ACD359;
+background-image:-webkit-linear-gradient(top, #ACD359 0%, #7D9F36 100%);
+background-image:linear-gradient(to bottom, #ACD359 0%, #7D9F36 100%);
 }
 .menu-deroulant li:last-child{
-background-color: #004D2F;
-background-image:-webkit-linear-gradient(top, #00AE6A 0%, #004D2F 100%);
-background-image:linear-gradient(to bottom, #00AE6A 0%, #004D2F 100%);
+background-color: #00AE6A;
+background-image:-webkit-linear-gradient(top, #00AE6A 0%, #007648 100%);
+background-image:linear-gradient(to bottom, #00AE6A 0%, #007648 100%);
 }
 /* background des liens sous menus */
 .menu-deroulant li:first-child li{
-background:#2A2333;
+background:#3D3249;
 }
 .menu-deroulant li:nth-child(2) li{
-background:#333A40;
+background:#527188;
 }
 .menu-deroulant li:nth-child(3) li{
-background:#6A0041;
+background:#A75387;
 }
 .menu-deroulant li:nth-child(4) li{
-background:#525252;
+background:#696969;
 }
 .menu-deroulant li:nth-child(5) li{
-background:#005E16;
+background:#139732;
 }
 .menu-deroulant li:nth-child(6) li{
-background:#5B0000;
+background:#8F1515;
 }
 .menu-deroulant li:nth-child(7) li{
-background:#797A00;
+background:#AEAC18;
 }
 .menu-deroulant li:nth-child(8) li{
-background:#677F35;
+background:#7D9F36;
 }
 .menu-deroulant li:last-child li{
-background:#004D2F;
+background:#007648;
 }
 /* background des liens menus et sous menus au survol */
 .menu-deroulant li:first-child:hover, .menu-deroulant li:first-child li:hover{
@@ -140,22 +140,22 @@ background:#65537A;
 background:#729EBF;
 }
 .menu-deroulant li:nth-child(3):hover, .menu-deroulant li:nth-child(3) li:hover{
-background: #F80098;
+background: #E38AC1;
 }
 .menu-deroulant li:nth-child(4):hover, .menu-deroulant li:nth-child(4) li:hover{
-background:#B2B2B2;
+background:#AAAAAA;
 }
 .menu-deroulant li:nth-child(5):hover, .menu-deroulant li:nth-child(5) li:hover{
-background:#00E035;
+background:#18D946;
 }
 .menu-deroulant li:nth-child(6):hover, .menu-deroulant li:nth-child(6) li:hover{
-background:#FF2121;
+background:#CD3030;
 }
 .menu-deroulant li:nth-child(7):hover, .menu-deroulant li:nth-child(7) li:hover{
-background: #FFFC00;
+background: #E9E61A;
 }
 .menu-deroulant li:nth-child(8):hover, .menu-deroulant li:nth-child(8) li:hover{
-background:#CFFF6A;
+background:#ACD359;
 }
 .menu-deroulant li:last-child:hover, .menu-deroulant li:last-child li:hover{
 background:#00AE6A;

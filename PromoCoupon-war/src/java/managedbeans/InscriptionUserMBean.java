@@ -13,6 +13,8 @@ import java.util.Map;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.*;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
 import session.AdresseManager;
 import session.UtilisateurManager;
 
@@ -24,7 +26,7 @@ import session.UtilisateurManager;
 @RequestScoped
 
 public class InscriptionUserMBean implements Serializable {
-
+    
     private Map<String, String> settings;
     @EJB
     private AdresseManager adrM;
@@ -68,8 +70,15 @@ public class InscriptionUserMBean implements Serializable {
         user.setAdrU(adr);
         user.setDataModif(new Date());
         userM.update(user);
+        
+        FacesContext context = FacesContext.getCurrentInstance();
+        SessionMBean sm = (SessionMBean) context.getApplication().
+                evaluateExpressionGet(context, "#{sessionMBean}", SessionMBean.class);
 
-        return "UtilisateurList";
+        System.out.println("hello "+sm);
+        sm.inscriptionConnect(settings.get("mail"), settings.get("pwd"));
+        
+        return "index";
     }
 
     public Map<String, String> getSettings() {
